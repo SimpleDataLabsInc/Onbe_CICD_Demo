@@ -13,8 +13,10 @@ FROM
   actual_count
 WHERE
   ( model, n_records) NOT IN (
-    ('customers', 100),
-    ( 'orders', 99))
+    ('ONBE_DEMO_DEV.PUBLIC.customers', 100),
+    ('ONBE_DEMO_DEV.PUBLIC.orders', 99),
+    ('ONBE_DEMO_PROD.PUBLIC.customers', 100),
+    ('ONBE_DEMO_PROD.PUBLIC.orders', 99))
 {% endtest %}
 
  
