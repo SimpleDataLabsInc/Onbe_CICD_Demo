@@ -12,7 +12,7 @@ jobs:
   jobs/run_all:
     name: run-all-dev
     description: ''
-    fabricUID: 22701
+    fabricUID: 22829
     scheduler:
       Prophecy: {}
     cloudProvider: null
@@ -38,7 +38,7 @@ jobs:
   jobs/run-all-prod:
     name: run-all-prod
     description: ''
-    fabricUID: 22701
+    fabricUID: 22829
     scheduler:
       Prophecy: {}
     cloudProvider: null
