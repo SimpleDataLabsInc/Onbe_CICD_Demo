@@ -1,0 +1,9 @@
+---
+version: 2
+dataTests:
+- name: "count_records"
+  arguments:
+  - name: "model"
+    type: "table"
+    description: "{\"ProphecyType\": \"table\"}"
+  type: "generic"
