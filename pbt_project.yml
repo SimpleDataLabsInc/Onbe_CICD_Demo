@@ -255,7 +255,15 @@ sqlModels:
       snapshots: []
     createdAt: '2024-08-05 08:36:43'
 sqlSnapshots: {}
-sqlTests: {}
+sqlTests:
+  .prophecy/metadata/sqltests/count_records:
+    name: count_records
+    description: null
+    author: best.neil@prophecy.io
+    files:
+    - tests/generic/count_customers.sql
+    testType: GenericDataTest
+    createdAt: '2025-03-10 19:16:52'
 sqlMacros:
   .prophecy/metadata/sqlmacros/generate_schema_name:
     name: generate_schema_name
