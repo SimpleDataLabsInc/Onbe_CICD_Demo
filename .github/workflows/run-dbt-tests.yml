@@ -11,15 +11,20 @@ jobs:
     name: Run DBT tests
     runs-on: ubuntu-latest
     steps:
+      - name: 'Install asdf'
+        uses: ynab/asdf-action@v1.2
+        with:
+          version: 0.16.1
       - uses: actions/checkout@v4.2.2
       - name: 'Install Python via `asdf`'
-        uses: asdf-vm/actions/install@v3.0.2
-      - uses: tiagovrtr/actions-pipenv@v1
+        run: asdf install
+      - name: 'Install `pipenv`'
+        uses: tiagovrtr/actions-pipenv@v1
         with:
           pipenv-version: 'v2024.4.1'
-      - name: 'Install `dbt` via pipenv'
+      - name: 'Install `dbt`, etc. via `pipenv`'
         run: pipenv install --sync
-      - name: 'run the tests'
+      - name: 'Run the tests'
         id: dbt-test
         run: dbt test
         env:
@@ -27,7 +32,7 @@ jobs:
           DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
           DBT_PROFILE:  ${{ github.base_ref }}
           DBT_PROFILES_DIR: .
-      - name: Show the result
+      - name: 'Show the result'
         if: ${{ always() }}
         run: echo "${{ steps.dbt-test.outputs.result }}"
         shell: bash
