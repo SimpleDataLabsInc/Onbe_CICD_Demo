@@ -14,12 +14,13 @@ jobs:
       - uses: actions/checkout@v4.2.2
       - name: 'Install Python via `asdf`'
         uses: asdf-vm/actions/install@v3.0.2
-      - name: 'Install `dbt` via pipenv'
-        uses: tiagovrtr/actions-pipenv@v1
+      - uses: tiagovrtr/actions-pipenv@v1
         with:
           pipenv-version: 'v2024.4.1'
+      - name: 'Install `dbt` via pipenv'
         run: pipenv install --sync
-      - id: dbt-test
+      - name: 'run the tests'
+        id: dbt-test
         run: dbt test
         env:
           DBT_USER: ${{ secrets.DBT_USER }}
