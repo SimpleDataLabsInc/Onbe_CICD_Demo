@@ -45,7 +45,7 @@ jobs:
             "DBT_PROFILE snowflake" \
             "DBT_PROFILES_DIR ${{ github.workspace }}" \
             "DBT_LOG_FORMAT_FILE json" \
-            "DBT_LOG_LEVEL_FILE info" \
+            "DBT_LOG_LEVEL_FILE info"
             do
               pipenv run dotenv set $KV
             done
