@@ -5,6 +5,9 @@ on:
       - main
       - dev
     types: [opened, synchronize]
+  push:
+    branches:
+      - dev-gha
 
 jobs:
   run_dbt_tests:
@@ -15,18 +18,21 @@ jobs:
         uses: ynab/asdf-action@v1.2
         with:
           version: 0.16.1
-      - uses: actions/checkout@v4.2.2
+      - run: 
       - name: 'Install Python via `asdf`'
-        run: asdf install
+        run: |
+          asdf plugin add python
+          asdf install
       - name: 'Install `pipenv`'
         uses: tiagovrtr/actions-pipenv@v1
         with:
           pipenv-version: 'v2024.4.1'
+      - uses: actions/checkout@v4.2.2
       - name: 'Install `dbt`, etc. via `pipenv`'
-        run: pipenv install && pipenv shell
+        run: pipenv install
       - name: 'Run the tests'
         id: dbt-test
-        run: dbt test
+        run: pipenv run dbt test
         env:
           DBT_USER: ${{ secrets.DBT_USER }}
           DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
