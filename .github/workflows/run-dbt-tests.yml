@@ -17,7 +17,7 @@ jobs:
       - name: 'Install system libs'
         env:
           DEBIAN_FRONTEND: noninteractive
-          APT_GET_BE_QUIET: '-qq -o quiet::NoProgress=true'
+          APT_GET_BE_QUIET: '-qq -o quiet::NoProgress=true -o Dpkg::Use-Pty=0'
         run: |
           sudo apt-get $APT_GET_BE_QUIET update && \
             sudo apt-get $APT_GET_BE_QUIET install \
@@ -45,13 +45,15 @@ jobs:
           {
             echo "DBT_USER=${DBT_USER}"
             echo "DBT_PASSWORD=${DBT_PASSWORD}"
+            echo "DBT_TARGET=${DBT_TARGET}"
             echo "DBT_PROFILE=${DBT_PROFILE}"
             echo "DBT_PROFILES_DIR=${DBT_PROFILES_DIR}"
           } > .env
         env:
           DBT_USER: ${{ secrets.DBT_USER }}
           DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
-          DBT_PROFILE: dev  # ${{ github.base_ref }}
+          DBT_TARGET: dev  # ${{ github.base_ref }}
+          DBT_PROFILE: snowflake
           DBT_PROFILES_DIR: ${{ github.workspace }}
       - run: cat .env
       - run: pipenv run echo '$DBT_PROFILES_DIR'

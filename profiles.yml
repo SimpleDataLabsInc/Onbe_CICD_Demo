@@ -1,13 +1,13 @@
-run_profile_snowflake:
+snowflake:
   target: dev
   outputs:
     dev:
       type: snowflake
       account: tu22760.ap-south-1.aws
       # User/password auth
-      user: _user_
-      password: _password_
-      authenticator: username_password_mfa
+      user: "{{ env_var('DBT_USER') }}"
+      password: "{{ env_var('DBT_PASSWORD') }}"
+      # authenticator: username_password_mfa
       role: ACCOUNTADMIN
       database: ONBE_DEMO_DEV
       warehouse: COMPUTE_WH
