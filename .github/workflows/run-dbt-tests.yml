@@ -50,6 +50,7 @@ jobs:
           DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
           DBT_PROFILE: dev  # ${{ github.base_ref }}
           DBT_PROFILES_DIR: ${{ github.workspace }}
+      - run: cat .env
       - name: 'Run the tests'
         id: dbt-test
         run: pipenv run dbt test
