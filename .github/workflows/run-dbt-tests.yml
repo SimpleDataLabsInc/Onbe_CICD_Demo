@@ -27,9 +27,7 @@ jobs:
           asdf current python
       # - run: echo "${{ steps.asdf.outputs.result }}"
       - name: 'Install `pipenv`'
-        uses: tiagovrtr/actions-pipenv@v1
-        with:
-          pipenv-version: 'v2024.4.1'
+        run: pip install 'pipenv==v2024.4.1' --user
       - name: 'Install `dbt`, etc. via `pipenv`'
         run: pipenv install
       - name: 'Run the tests'
