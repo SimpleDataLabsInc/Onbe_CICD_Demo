@@ -31,34 +31,22 @@ jobs:
           version: 0.16.1
         env:
           WGETRC: ${{ github.workspace }}/.wgetrc
-      - name: 'Install Python via `asdf`'
-        id: asdf
+      - name: 'Install, configure, and test tools'
         run: |
           asdf plugin add python https://github.com/asdf-community/asdf-python
           asdf install python
           asdf current python
-      # - run: echo "${{ steps.asdf.outputs.result }}"
-      - name: 'Install `pipenv`'
-        run: pip install 'pipenv==v2024.4.1' --user
-      - name: 'Install `dbt`, etc. via `pipenv`'
-        run: pipenv install
-      - name: 'Test the connection'
-        run: |
-          {
-            echo "DBT_USER=${DBT_USER}"
-            echo "DBT_PASSWORD=${DBT_PASSWORD}"
-            echo "DBT_TARGET=${DBT_TARGET}"
-            echo "DBT_PROFILE=${DBT_PROFILE}"
-            echo "DBT_PROFILES_DIR=${DBT_PROFILES_DIR}"
-          } > .env
+          pip install 'pipenv==v2024.4.1' --user
+          pipenv install
+          dotenv set DBT_USER ${{ secrets.DBT_USER }}
+          dotenv set DBT_PASSWORD ${{ secrets.DBT_PASSWORD }}
+          dotenv set DBT_TARGET ${{ github.base_ref == 'main' && 'prod' || 'dev' }}
+          dotenv set DBT_PROFILE snowflake
+          dotenv set DBT_PROFILES_DIR ${{ github.workspace }}
+          dotenv set DBT_LOG_FORMAT_FILE json
+          dotenv set DBT_LOG_LEVEL_FILE info
           pipenv run dbt debug --connection
-        env:
-          DBT_USER: ${{ secrets.DBT_USER }}
-          DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
-          DBT_TARGET: dev  # ${{ github.base_ref }}
-          DBT_PROFILE: snowflake
-          DBT_PROFILES_DIR: ${{ github.workspace }}
-      - name: 'Run the tests'
+      - name: 'Run the SQL tests'
         id: dbt-test
         run: pipenv run dbt test
       - name: 'Show the result'
