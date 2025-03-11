@@ -38,6 +38,7 @@ jobs:
           asdf current python
           pip install 'pipenv==v2024.4.1' --user
           pipenv install
+          touch .env
           dotenv set DBT_USER ${{ secrets.DBT_USER }}
           dotenv set DBT_PASSWORD ${{ secrets.DBT_PASSWORD }}
           dotenv set DBT_TARGET ${{ github.base_ref == 'main' && 'prod' || 'dev' }}
