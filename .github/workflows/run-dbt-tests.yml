@@ -37,14 +37,22 @@ jobs:
         run: pip install 'pipenv==v2024.4.1' --user
       - name: 'Install `dbt`, etc. via `pipenv`'
         run: pipenv install
-      - name: 'Run the tests'
-        id: dbt-test
-        run: pipenv run dbt test
+      - name: 'Write `.env`'
+        run: |
+          {
+            echo "DBT_USER=${DBT_USER}"
+            echo "DBT_PASSWORD=${DBT_PASSWORD}"
+            echo "DBT_PROFILE=${DBT_PROFILE}"
+            echo "DBT_PROFILES_DIR=${DBT_PROFILES_DIR}"
+          } > .env
         env:
           DBT_USER: ${{ secrets.DBT_USER }}
           DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
           DBT_PROFILE: dev  # ${{ github.base_ref }}
           DBT_PROFILES_DIR: ${{ github.workspace }}
+      - name: 'Run the tests'
+        id: dbt-test
+        run: pipenv run dbt test
       - name: 'Show the result'
         if: ${{ always() }}
         run: echo "${{ steps.dbt-test.outputs.result }}"
