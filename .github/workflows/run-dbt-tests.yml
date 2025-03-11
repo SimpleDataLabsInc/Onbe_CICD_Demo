@@ -23,7 +23,7 @@ jobs:
         with:
           pipenv-version: 'v2024.4.1'
       - name: 'Install `dbt`, etc. via `pipenv`'
-        run: pipenv install
+        run: pipenv install && pipenv shell
       - name: 'Run the tests'
         id: dbt-test
         run: dbt test
