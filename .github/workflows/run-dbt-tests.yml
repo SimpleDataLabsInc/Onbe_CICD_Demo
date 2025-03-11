@@ -19,9 +19,12 @@ jobs:
         with:
           version: 0.16.1
       - name: 'Install Python via `asdf`'
+        id: asdf
         run: |
           asdf plugin add python
           asdf install
+          asdf current
+      - run: echo "${{ steps.asdf.outputs.result }}"
       - name: 'Install `pipenv`'
         uses: tiagovrtr/actions-pipenv@v1
         with:
