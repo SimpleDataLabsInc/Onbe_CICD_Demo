@@ -14,6 +14,7 @@ jobs:
     name: Run DBT tests
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4.2.2
       - name: 'Install asdf'
         uses: ynab/asdf-action@v1.2
         with:
@@ -21,15 +22,14 @@ jobs:
       - name: 'Install Python via `asdf`'
         id: asdf
         run: |
-          asdf plugin add python
-          asdf install
-          asdf current
-      - run: echo "${{ steps.asdf.outputs.result }}"
+          asdf plugin add python https://github.com/asdf-community/asdf-python
+          asdf install python
+          asdf current python
+      # - run: echo "${{ steps.asdf.outputs.result }}"
       - name: 'Install `pipenv`'
         uses: tiagovrtr/actions-pipenv@v1
         with:
           pipenv-version: 'v2024.4.1'
-      - uses: actions/checkout@v4.2.2
       - name: 'Install `dbt`, etc. via `pipenv`'
         run: pipenv install
       - name: 'Run the tests'
