@@ -15,9 +15,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: 'Install system libs'
+        env:
+          DEBIAN_FRONTEND: noninteractive
         run: |
-          sudo apt-get update && \
-            sudo apt-get install -y \
+          sudo apt-get -qq update && \
+            sudo apt-get -qq install \
               libbz2-dev \
               liblzma-dev \
               libreadline-dev
