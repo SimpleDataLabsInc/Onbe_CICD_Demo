@@ -51,7 +51,7 @@ jobs:
             echo "DBT_PROFILE=${DBT_PROFILE}"
             echo "DBT_PROFILES_DIR=${DBT_PROFILES_DIR}"
           } > .env
-          pipenv debug --connection
+          pipenv run dbt debug --connection
         env:
           DBT_USER: ${{ secrets.DBT_USER }}
           DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
