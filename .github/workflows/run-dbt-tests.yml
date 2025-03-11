@@ -17,9 +17,10 @@ jobs:
       - name: 'Install system libs'
         env:
           DEBIAN_FRONTEND: noninteractive
+          APT_GET_BE_QUIET: 'quiet "2" { NoProgress "true";};'
         run: |
-          sudo apt-get -qq update && \
-            sudo apt-get -qq install \
+          sudo apt-get -o="${APT_GET_BE_QUIET}" update && \
+            sudo apt-get -o="${APT_GET_BE_QUIET}" install \
               libbz2-dev \
               liblzma-dev \
               libreadline-dev
