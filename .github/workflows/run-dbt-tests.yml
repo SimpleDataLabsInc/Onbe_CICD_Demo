@@ -38,14 +38,17 @@ jobs:
           asdf current python
           pip install 'pipenv==v2024.4.1' --user
           pipenv install
-          touch .env
-          dotenv set DBT_USER ${{ secrets.DBT_USER }}
-          dotenv set DBT_PASSWORD ${{ secrets.DBT_PASSWORD }}
-          dotenv set DBT_TARGET ${{ github.base_ref == 'main' && 'prod' || 'dev' }}
-          dotenv set DBT_PROFILE snowflake
-          dotenv set DBT_PROFILES_DIR ${{ github.workspace }}
-          dotenv set DBT_LOG_FORMAT_FILE json
-          dotenv set DBT_LOG_LEVEL_FILE info
+          for KV in \
+            "DBT_USER ${{ secrets.DBT_USER }}" \
+            "DBT_PASSWORD ${{ secrets.DBT_PASSWORD }}" \
+            "DBT_TARGET ${{ github.base_ref == 'main' && 'prod' || 'dev' }}" \
+            "DBT_PROFILE snowflake" \
+            "DBT_PROFILES_DIR ${{ github.workspace }}" \
+            "DBT_LOG_FORMAT_FILE json" \
+            "DBT_LOG_LEVEL_FILE info" \
+            do
+              pipenv run dotenv set $KV
+            done
           pipenv run dbt debug --connection
       - name: 'Run the SQL tests'
         id: dbt-test
