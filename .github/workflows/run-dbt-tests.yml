@@ -19,6 +19,7 @@ jobs:
           sudo apt-get update && \
             sudo apt-get install -y \
               libbz2-dev \
+              liblzma-dev \
               libreadline-dev
       - uses: actions/checkout@v4.2.2
       - name: 'Install asdf'
@@ -43,7 +44,7 @@ jobs:
           DBT_USER: ${{ secrets.DBT_USER }}
           DBT_PASSWORD: ${{ secrets.DBT_PASSWORD }}
           DBT_PROFILE: dev  # ${{ github.base_ref }}
-          DBT_PROFILES_DIR: .
+          DBT_PROFILES_DIR: ${{ github.workspace }}
       - name: 'Show the result'
         if: ${{ always() }}
         run: echo "${{ steps.dbt-test.outputs.result }}"
