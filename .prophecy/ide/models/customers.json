@@ -2,7 +2,7 @@
   "id" : "customers",
   "metainfo" : {
     "label" : "customers",
-    "autoLayout" : true,
+    "autoLayout" : false,
     "staleState" : "none",
     "sourceSuggestions" : {
       "sources" : [ ]
@@ -25,6 +25,8 @@
       "component" : "Aggregate",
       "metadata" : {
         "label" : "customer_orders",
+        "x" : 280,
+        "y" : 220,
         "phase" : 0,
         "macroDependencies" : [ ],
         "isLabelGrayed" : false
@@ -86,6 +88,8 @@
       "component" : "Join",
       "metadata" : {
         "label" : "final",
+        "x" : 480,
+        "y" : 220,
         "phase" : 0,
         "macroDependencies" : [ ],
         "isLabelGrayed" : false
@@ -171,6 +175,8 @@
       "component" : "SQLStatement",
       "metadata" : {
         "label" : "customer_payments",
+        "x" : 280,
+        "y" : 420,
         "phase" : 0,
         "isLabelGrayed" : false
       },
@@ -204,6 +210,8 @@
       "component" : "Model",
       "metadata" : {
         "label" : "orders",
+        "x" : 20,
+        "y" : 420,
         "phase" : 0,
         "isLabelGrayed" : false
       },
@@ -229,6 +237,8 @@
       "component" : "Model",
       "metadata" : {
         "label" : "payments",
+        "x" : 20,
+        "y" : 220,
         "phase" : 0,
         "isLabelGrayed" : false
       },
@@ -254,6 +264,8 @@
       "component" : "Model",
       "metadata" : {
         "label" : "customers",
+        "x" : 160,
+        "y" : -20,
         "phase" : 0,
         "isLabelGrayed" : false
       },
@@ -279,6 +291,8 @@
       "component" : "TargetModel",
       "metadata" : {
         "label" : "customers",
+        "x" : 680,
+        "y" : 220,
         "phase" : 0,
         "isLabelGrayed" : false
       },
