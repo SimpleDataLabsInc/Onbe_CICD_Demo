@@ -1,4 +1,4 @@
-from tv3bzna0_rpi5wnkxow47a_.utils import *
+from wn7hos8zlzpysyyiz2jotg_.utils import *
 
 def prod():
     from airflow.operators.python import PythonOperator
@@ -22,8 +22,8 @@ def prod():
           "entity_kind": None,
           "entity_name": None,
           "project_id": "42856",
-          "git_entity": "tag",
-          "git_entity_value": "__PROJECT_FULL_RELEASE_TAG_PLACEHOLDER__",
+          "git_entity": "branch",
+          "git_entity_value": None,
           "git_ssh_url": "https://github.com/SimpleDataLabsInc/Onbe_CICD_Demo",
           "git_sub_path": "",
           "select": "",
