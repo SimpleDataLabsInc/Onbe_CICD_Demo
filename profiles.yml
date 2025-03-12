@@ -20,13 +20,13 @@ snowflake:
       connect_timeout: 10 # default: 10
       retry_on_database_errors: False # default: false
       retry_all: False  # default: false
-    main:
+    prod:
       type: snowflake
       account: tu22760.ap-south-1.aws
       # User/password auth
-      user: _user_
-      password: _password_
-      authenticator: username_password_mfa
+      user: "{{ env_var('DBT_USER') }}"
+      password: "{{ env_var('DBT_PASSWORD') }}"
+      # authenticator: username_password_mfa
       role: ACCOUNTADMIN
       database: ONBE_DEMO_PROD
       warehouse: COMPUTE_WH
