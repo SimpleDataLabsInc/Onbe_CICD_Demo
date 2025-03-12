@@ -264,8 +264,8 @@
       "component" : "Model",
       "metadata" : {
         "label" : "customers",
-        "x" : 280,
-        "y" : 20,
+        "x" : 160,
+        "y" : -20,
         "phase" : 0,
         "isLabelGrayed" : false
       },
