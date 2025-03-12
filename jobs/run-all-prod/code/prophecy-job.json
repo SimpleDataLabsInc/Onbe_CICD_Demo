@@ -6,7 +6,7 @@
     "name" : "run-all-prod",
     "dagName" : "TV3bZNA0_RPi5wnkxow47A_",
     "schedule" : "0/1 * * * *",
-    "enabled" : false,
+    "enabled" : true,
     "alerting" : {
       "emails" : "",
       "onStart" : false,

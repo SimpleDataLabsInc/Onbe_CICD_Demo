@@ -29,7 +29,7 @@ jobs:
       clusterMode:
         Multi: {}
       clusterId: null
-    enabled: false
+    enabled: true
     createdAt: '2025-02-27 16:33:18'
     author: best.neil@prophecy.io
     models: []
@@ -55,7 +55,7 @@ jobs:
       clusterMode:
         Multi: {}
       clusterId: null
-    enabled: false
+    enabled: true
     createdAt: '2025-03-03 19:11:35'
     author: best.neil@prophecy.io
     models: []
