@@ -6,7 +6,7 @@
     "name" : "run-all-dev",
     "dagName" : "0qyTBN7imaJRWaeACBX9UQ_",
     "schedule" : "0/1 * * * *",
-    "enabled" : false,
+    "enabled" : true,
     "alerting" : {
       "emails" : "",
       "onStart" : false,

@@ -9,7 +9,7 @@
     },
     "graphConfig" : {
       "entityConfig" : {
-        "database" : "'ONBE_DEMO_' ~ var('env')  ~ '_2'",
+        "database" : "'ONBE_DEMO_' ~ var('env') ",
         "type" : "ModelConfig"
       },
       "userDefinedConfig" : {
@@ -99,7 +99,7 @@
         "y" : 20,
         "phase" : 0,
         "macroDependencies" : [ ],
-        "comment" : "Prepares a staging area for orders by renaming the data source.",
+        "comment" : "Prepares a staging area for orders by renaming the dataset for further processing.",
         "autoUpdateComment" : true
       },
       "properties" : {
