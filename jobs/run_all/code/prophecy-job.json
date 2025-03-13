@@ -4,9 +4,9 @@
     "fabricId" : "22829",
     "jobId" : "jobs/run_all",
     "name" : "run-all-dev",
-    "dagName" : "Y6vJ_vJzN15XaACjbCh0KQ_",
+    "dagName" : "0qyTBN7imaJRWaeACBX9UQ_",
     "schedule" : "0/1 * * * *",
-    "enabled" : true,
+    "enabled" : false,
     "alerting" : {
       "emails" : "",
       "onStart" : false,
