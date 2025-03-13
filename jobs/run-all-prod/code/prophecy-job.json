@@ -6,7 +6,7 @@
     "name" : "run-all-prod",
     "dagName" : "best_neil_Onbe_CICD_Demo_run_all_prod",
     "schedule" : "0/1 * * * *",
-    "enabled" : true,
+    "enabled" : false,
     "alerting" : {
       "emails" : "",
       "onStart" : false,
