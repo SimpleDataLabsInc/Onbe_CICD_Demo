@@ -4,7 +4,7 @@
     "fabricId" : "22829",
     "jobId" : "jobs/run-all-prod",
     "name" : "run-all-prod",
-    "dagName" : "Wn7hoS8ZLzpysYyiz2jotg_",
+    "dagName" : "TV3bZNA0_RPi5wnkxow47A_",
     "schedule" : "0/1 * * * *",
     "enabled" : false,
     "alerting" : {
