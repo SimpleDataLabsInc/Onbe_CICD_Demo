@@ -1,4 +1,4 @@
-from tv3bzna0_rpi5wnkxow47a_.utils import *
+from best_neil_onbe_cicd_demo_run_all_prod.utils import *
 
 def prod():
     from airflow.operators.python import PythonOperator
@@ -12,7 +12,7 @@ def prod():
         python_callable = invoke_dbt_runner,
         op_kwargs = {
           "is_adhoc_run_from_same_project": False,
-          "is_prophecy_managed": True,
+          "is_prophecy_managed": False,
           "run_deps": False,
           "run_seeds": True,
           "run_parents": False,
@@ -21,7 +21,7 @@ def prod():
           "run_mode": "project",
           "entity_kind": None,
           "entity_name": None,
-          "project_id": "42856",
+          "project_id": "43358",
           "git_entity": "tag",
           "git_entity_value": "__PROJECT_FULL_RELEASE_TAG_PLACEHOLDER__",
           "git_ssh_url": "https://github.com/SimpleDataLabsInc/Onbe_CICD_Demo",
@@ -29,9 +29,7 @@ def prod():
           "select": "",
           "threads": "",
           "exclude": "",
-          "run_props": " --profile run_profile --vars {\"env\":\"{{ params.env_prod }}\"}",
-          "envs": {"DBT_DATABRICKS_INVOCATION_ENV" : "prophecy"}, 
-          "git_token_secret": "_NtjBb4zgHIz_motVpzuEg_", 
-          "dbt_profile_secret": "NzOYOhrwZlUSnUcoXeZlb"
+          "run_props": " --profile run_profile_snowflake --vars {\"env\":\"{{ params.env_prod }}\"}",
+          "envs": {"DBT_DATABRICKS_INVOCATION_ENV" : "prophecy", "DBT_PROFILES_DIR" : "/usr/local/airflow/dags"}
         },
     )
