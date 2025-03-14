@@ -1,0 +1,49 @@
+name: Check Prophecy minor version
+
+on:
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.base_ref }}
+  cancel-in-progress: false
+
+jobs:
+  compare_minor_version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up environment variables
+        run: |
+          # echo "PROJECT_SUBPATH=." >> $GITHUB_ENV
+          # echo "CHANGE_TARGET=${{ github.base_ref || github.ref_name }}" >> $GITHUB_ENV
+
+      - name: Run versioning check and commit if changed
+        run: |
+          # if ! pbt versioning --path "$PROJECT_SUBPATH" --compare "$CHANGE_TARGET"; then
+          if ! pbt versioning \
+            --path ${{ github.workspace }} \
+            --compare ${{ github.base_ref }} \
+            then
+              # pbt versioning --path "$PROJECT_SUBPATH" --compare "$CHANGE_TARGET" --bump minor
+              pbt versioning \
+                --path "${{ github.workspace }} \
+                --compare "${{ github.base_ref }} \
+                --bump minor
+              git config \
+                --global user.name \
+                "github-actions[bot]"
+              git config \
+                --global user.email \
+                  "github-actions[bot]@users.noreply.github.com"
+              # git add "$PROJECT_SUBPATH"
+              git add ${{ github.workspace }}
+              git commit -m "Auto bump minor version"
+              git push
+              exit 1  # Fail the job to indicate changes were needed
+          fi
