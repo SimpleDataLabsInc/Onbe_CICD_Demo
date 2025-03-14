@@ -12,57 +12,10 @@ import re
 import tempfile
 from dbt.cli.main import dbtRunner, dbtRunnerResult
 import shutil
-import time
-from keyring.testing.util import random_string
-
 
 # setup logging
 logging.basicConfig()
 LOG = logging.getLogger('shell')
-
-
-## for pm-fabs
-def get_secret(secret_id: str) -> Optional[str]:
-    from google.cloud import secretmanager
-    project_id = os.getenv('PROPHECY_PROJECT_ID')
-    LOG.info(f"Trying to fetch secret - {secret_id} for prophecy project id {project_id}")
-
-    try:
-        client = secretmanager.SecretManagerServiceClient()
-        name = f"projects/{project_id}/secrets/{secret_id}/versions/latest"
-        response = client.access_secret_version(name=name)
-        return response.payload.data.decode("UTF-8")
-    except Exception as e:
-        LOG.error(f"ERROR: Failed to fetch secret for {secret_id}", e)
-        raise e
-
-def create_temp_file():
-    filename = f"tempfile_{int(time.time())}_{random_string(6)}"
-    file_path = os.path.join("/tmp", filename)
-    file = open(file_path, "w")
-    file.close()
-    return file_path
-
-
-def set_git_keypass(git_file, git_secret: str):
-    if git_secret and len(git_secret) > 0:
-        git_secret_val = get_secret(git_secret)
-        if git_secret_val and len(git_secret_val) > 0:
-            with open(git_file, "w") as f:
-                f.write(f'#!/bin/sh\necho {git_secret_val}\n')
-                f.flush()
-            os.chmod(git_file, 0o700)
-            os.environ["GIT_ASKPASS"] = git_file
-
-
-def make_dbt_profiles_dir(root_dir, secret: str):
-    if secret and len(secret) > 0:
-        secret_val = get_secret(f"airflow-connections-{secret}")
-        if secret_val and len(secret_val) > 0:
-            with open(f"{root_dir}/profiles.yml", "w") as f:
-                f.write(base64.urlsafe_b64decode(secret_val).decode('utf-8'))
-                f.flush()
-
 
 ## dbt commands
 runner = dbtRunner()
@@ -83,6 +36,8 @@ def execute_dbt_cmd(command):
             if str(result.status) == 'error':
                 raise Exception(result.message)
         return results
+
+
 
 
 ## extract dependency of same package only.
@@ -153,7 +108,6 @@ def dbt_command_executor(folder_path: str, suffix: str):
     cmd = f"dbt ls {suffix} --output=json"
     LOG.info(f"Running command {cmd}")
     response = execute_dbt_cmd(cmd)
-    LOG.info("Response from dbt cmd %s", response)
     entities = {}
 
     for line in response:
@@ -234,18 +188,17 @@ def remove_files_and_folders(path):
         LOG.error(f"Failed to remove {path}: {e}")
 
 
-########################################################  runner command ##############################################
-
+######################################################## runner commands #################################################
 def command_runner(cmd_list=[]):
     for cmd in cmd_list:
         LOG.info(f"Command: {cmd}")
         if cmd.startswith("dbt "):
             try:
                 response = execute_dbt_cmd(cmd)
-                LOG.info(f"Response from dbt cmd {response}")
+                LOG.info(f"Response from dbt cmd {str(response)}")
             except Exception as e:
-                LOG.error(f"Command failed with exit code", e)
-                raise Exception(f"Command failed with exit code %s", e)
+                LOG.error(f"Command failed with exit code", str(e))
+                raise Exception(f"Command failed with exit code %s", str(e))
         else:
             ## for cmd like git clone.
             try:
@@ -254,11 +207,12 @@ def command_runner(cmd_list=[]):
 
                 result = subprocess.run(cmd, shell=True, capture_output=True, text=True, check=False)
                 if result.returncode != 0:
-                    raise Exception(f"Command failed with exit code {result.returncode} and error {result.stderr}")
+                    raise Exception(
+                        f"Command failed with exit code {str(result.returncode)} and error {str(result.stderr)}")
 
             except subprocess.CalledProcessError as e:
-                LOG.error(f"Command failed with exit code", e)
-                raise Exception(f"Command failed with exit code {e.returncode} and error {e.stderr}")
+                LOG.error(f"Command failed with exit code", str(e))
+                raise Exception(f"Command failed with exit code {str(e.returncode)} and error {str(e.stderr)}")
 
 def run_command(props: str, project_folder: str, dep: bool, seeds: bool, run_mode: str,
                 entity_kind: str, entity_name: str, run_parents: bool, run_children: bool,
@@ -274,7 +228,7 @@ def run_command(props: str, project_folder: str, dep: bool, seeds: bool, run_mod
     if seeds:
         cmd_list = cmd_list + [f"dbt seed {props} {threads_option}"]
     if run_mode == "project":
-        cmd_list = cmd_list + [f"dbt run {props} {select_suffix} {threads_option}"]
+        cmd_list = cmd_list + [f"dbt run {props} {threads_option} {select_suffix}"]
     else:
         cmd_list = cmd_list + get_parents(run_parents, project_folder, entity_kind, entity_name, props, threads_option,
                                           exclude)
@@ -293,19 +247,19 @@ def run_command(props: str, project_folder: str, dep: bool, seeds: bool, run_mod
 
 
 ########################################################  CMD invokers ##############################################
+
+
 def invoke_dbt_runner(run_mode, entity_kind, entity_name, run_deps,
                       run_seeds, run_props, run_parents, run_children, run_tests,
-                      select, exclude, git_ssh_url, git_entity, git_entity_value, git_sub_path,
-                      git_token_secret: str, dbt_profile_secret: str, envs: dict, threads: Optional[str], **kwargs):
+                      select, exclude, git_ssh_url, git_entity, git_entity_value, git_sub_path, envs, threads,
+                      **kwargs):
     for key, value in envs.items():
         os.environ[key] = value
 
     file_path = os.path.dirname(os.path.abspath(__file__))
     temp_folder = tempfile.mkdtemp(dir="/tmp")
-    profiles_temp_dir = tempfile.mkdtemp(dir="/tmp")
-    tmp_file = create_temp_file()
-    try:
 
+    try:
         file_path_as_list = file_path.split("/")
         zip_index = next((i for i, part in enumerate(file_path_as_list) if part.endswith('.zip')), None)
 
@@ -318,10 +272,8 @@ def invoke_dbt_runner(run_mode, entity_kind, entity_name, run_deps,
         zip_path = "/".join(file_path_as_list[:(zip_index + 1)])
         extract_folder_from_zip(zip_path, "project")
         project_folder = f"{temp_folder}/project"
+
         LOG.info(f"project_folder: {project_folder} + flag:{(os.path.isdir(project_folder))} zip_path:{zip_path}")
-
-        set_git_keypass(tmp_file, git_token_secret)
-
         cmd_list = []
         if not (os.path.isdir(project_folder)):
             git_cmd = "git clone "
@@ -343,10 +295,6 @@ def invoke_dbt_runner(run_mode, entity_kind, entity_name, run_deps,
             command_runner(cmd_list)
             cmd_list = []
 
-        LOG.info(f"Prophecy managed update on path {project_folder}")
-        make_dbt_profiles_dir(profiles_temp_dir, dbt_profile_secret)
-
-        run_props = run_props + f" --profiles-dir {profiles_temp_dir}"
         run_command(props=run_props,
                     project_folder=project_folder,
                     dep=run_deps,
@@ -362,7 +310,5 @@ def invoke_dbt_runner(run_mode, entity_kind, entity_name, run_deps,
                     select=select,
                     exclude=exclude)
     finally:
-        LOG.info(f"Cleaning up temp folders {temp_folder}, {profiles_temp_dir} and temp file {tmp_file}")
+        LOG.info(f"Cleaning up temp folder {temp_folder}")
         remove_files_and_folders(temp_folder)
-        remove_files_and_folders(tmp_file)
-        remove_files_and_folders(profiles_temp_dir)
