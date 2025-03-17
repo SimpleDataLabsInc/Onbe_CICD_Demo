@@ -19,6 +19,7 @@ jobs:
       #   with:
       #     token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v4.2.2
+      - run: git fetch origin ${{ github.base_ref }}
       - uses: actions/setup-python@19e4675e06535f6b54e894da5c1f044400bb4996
         # this SHA is post-5.4.0 to get `.tool-versions` support from PR #1043
         id: setup
@@ -38,26 +39,24 @@ jobs:
           echo ${{ steps.setup.outputs.cache-hit }}
       - name: Run versioning check and commit if changed
         run: |
-          # if ! pbt versioning --path "$PROJECT_SUBPATH" --compare "$CHANGE_TARGET"; then
           if ! pipenv run \
             pbt versioning \
-              --path ${{ github.workspace }} \
-              --compare ${{ github.base_ref }};
+              --path . \
+              --compare "${{ github.base_ref }}" ;
           then
               # pbt versioning --path "$PROJECT_SUBPATH" --compare "$CHANGE_TARGET" --bump minor
               pipenv run \
                 pbt versioning \
-                  --path "${{ github.workspace }} \
-                  --compare "${{ github.base_ref }} \
+                  --path . \
+                  --compare "${{ github.base_ref }}" \
                   --bump minor
               git config \
-                --global user.name \
-                "github-actions[bot]"
+                --global user.name "github-actions[bot]"
               git config \
                 --global user.email \
                   "github-actions[bot]@users.noreply.github.com"
               # git add "$PROJECT_SUBPATH"
-              git add ${{ github.workspace }}
+              git add "${{ github.workspace }}"
               git commit -m "Auto bump minor version"
               git push
               exit 1  # Fail the job to indicate changes were needed
