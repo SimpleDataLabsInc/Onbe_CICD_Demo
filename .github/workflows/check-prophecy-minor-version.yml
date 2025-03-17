@@ -19,6 +19,8 @@ jobs:
       #   with:
       #     token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v4.2.2
+        with:
+          ref: ${{ github.head_ref }}
       - run: git fetch origin ${{ github.base_ref }}
       - uses: actions/setup-python@19e4675e06535f6b54e894da5c1f044400bb4996
         # this SHA is post-5.4.0 to get `.tool-versions` support from PR #1043
