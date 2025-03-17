@@ -56,8 +56,8 @@
       "metadata" : {
         "label" : "prod",
         "slug" : "prod",
-        "x" : -780,
-        "y" : -340
+        "x" : -940,
+        "y" : -600
       },
       "ports" : {
         "inputs" : [ {
