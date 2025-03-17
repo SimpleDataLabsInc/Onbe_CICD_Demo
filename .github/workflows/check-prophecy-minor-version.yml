@@ -11,30 +11,45 @@ concurrency:
 
 jobs:
   compare_minor_version:
+    name: compare minor version; maybe bump it
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      # - name: Checkout code
+      #   uses: actions/checkout@v4
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v4.2.2
+      - uses: actions/setup-python@19e4675e06535f6b54e894da5c1f044400bb4996
+        # this SHA is post-5.4.0 to get `.tool-versions` support from PR #1043
+        id: setup
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Set up environment variables
-        run: |
+          python-version-file: '.tool-versions'
+          cache: 'pipenv'
+      # - name: Set up environment variables
+      #   run: |
           # echo "PROJECT_SUBPATH=." >> $GITHUB_ENV
           # echo "CHANGE_TARGET=${{ github.base_ref || github.ref_name }}" >> $GITHUB_ENV
-
+      - name: Install `pipenv`, etc.
+        run: |
+          pip install 'pipenv==v2024.4.1' --user
+          pipenv install
+      - run: |
+          echo -n "Setup cache hit? : "
+          echo ${{ steps.setup.outputs.cache-hit }}
       - name: Run versioning check and commit if changed
         run: |
           # if ! pbt versioning --path "$PROJECT_SUBPATH" --compare "$CHANGE_TARGET"; then
-          if ! pbt versioning \
-            --path ${{ github.workspace }} \
-            --compare ${{ github.base_ref }} \
-            then
+          if ! pipenv run \
+            pbt versioning \
+              --path ${{ github.workspace }} \
+              --compare ${{ github.base_ref }};
+          then
               # pbt versioning --path "$PROJECT_SUBPATH" --compare "$CHANGE_TARGET" --bump minor
-              pbt versioning \
-                --path "${{ github.workspace }} \
-                --compare "${{ github.base_ref }} \
-                --bump minor
+              pipenv run \
+                pbt versioning \
+                  --path "${{ github.workspace }} \
+                  --compare "${{ github.base_ref }} \
+                  --bump minor
               git config \
                 --global user.name \
                 "github-actions[bot]"
