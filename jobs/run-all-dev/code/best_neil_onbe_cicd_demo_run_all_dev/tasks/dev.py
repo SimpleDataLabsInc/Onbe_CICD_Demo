@@ -21,7 +21,7 @@ def dev():
           "run_mode": "project",
           "entity_kind": None,
           "entity_name": None,
-          "project_id": "43358",
+          "project_id": "43415",
           "git_entity": "tag",
           "git_entity_value": "__PROJECT_FULL_RELEASE_TAG_PLACEHOLDER__",
           "git_ssh_url": "https://github.com/SimpleDataLabsInc/Onbe_CICD_Demo",
