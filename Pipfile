@@ -6,8 +6,8 @@ name = "pypi"
 [packages]
 dbt-core = "*"
 dbt-snowflake = "*"
-prophecy-build-tool = "*"
 python-dotenv = {extras = ["cli"], version = "*"}
+prophecy-build-tool = "==1.2.49"
 
 [dev-packages]
 
