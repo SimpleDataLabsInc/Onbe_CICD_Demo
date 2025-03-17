@@ -28,8 +28,8 @@ jobs:
           # if ! pbt versioning --path "$PROJECT_SUBPATH" --compare "$CHANGE_TARGET"; then
           if ! pbt versioning \
             --path ${{ github.workspace }} \
-            --compare ${{ github.base_ref }} \
-            then
+            --compare ${{ github.base_ref }};
+          then
               # pbt versioning --path "$PROJECT_SUBPATH" --compare "$CHANGE_TARGET" --bump minor
               pbt versioning \
                 --path "${{ github.workspace }} \
