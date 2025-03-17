@@ -4,7 +4,6 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.base_ref }}
@@ -12,13 +11,14 @@ concurrency:
 
 jobs:
   compare_minor_version:
+    name: compare minor version; maybe bump it
     runs-on: ubuntu-latest
     steps:
       # - name: Checkout code
       #   uses: actions/checkout@v4
       #   with:
       #     token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.2.2
       - uses: actions/setup-python@19e4675e06535f6b54e894da5c1f044400bb4996
         # this SHA is post-5.4.0 to get `.tool-versions` support from PR #1043
         id: setup
