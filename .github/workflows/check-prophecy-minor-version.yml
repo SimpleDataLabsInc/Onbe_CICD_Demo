@@ -7,7 +7,7 @@ on:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.base_ref }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   compare_minor_version:
