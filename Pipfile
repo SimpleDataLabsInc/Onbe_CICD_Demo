@@ -8,7 +8,7 @@ dbt-core = "*"
 dbt-snowflake = "*"
 python-dotenv = {extras = ["cli"], version = "*"}
 prophecy-build-tool = "==1.2.49"
-jeepney = ">0.4.2"
+secretstorage = ">=3.2.0"
 
 [dev-packages]
 
