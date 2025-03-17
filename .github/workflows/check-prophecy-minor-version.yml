@@ -14,16 +14,27 @@ jobs:
   compare_minor_version:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      # - name: Checkout code
+      #   uses: actions/checkout@v4
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        id: setup
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Set up environment variables
-        run: |
+          python-version-file: '.tool-versions'
+          cache: 'pipenv'
+      # - name: Set up environment variables
+      #   run: |
           # echo "PROJECT_SUBPATH=." >> $GITHUB_ENV
           # echo "CHANGE_TARGET=${{ github.base_ref || github.ref_name }}" >> $GITHUB_ENV
-
+      - name: Install `pipenv`, etc.
+        run: |
+          pip install 'pipenv==v2024.4.1' --user
+          pipenv install
+      - run: |
+          echo -n "Setup cache hit? : "
+          echo ${{ steps.setup.outputs.cache-hit }}
       - name: Run versioning check and commit if changed
         run: |
           # if ! pbt versioning --path "$PROJECT_SUBPATH" --compare "$CHANGE_TARGET"; then
