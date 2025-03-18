@@ -6,7 +6,7 @@
     "name" : "run-all-dev",
     "dagName" : "best_neil_Onbe_CICD_Demo_run_all_dev",
     "schedule" : "0/1 * * * *",
-    "enabled" : false,
+    "enabled" : true,
     "alerting" : {
       "emails" : "",
       "onStart" : false,
