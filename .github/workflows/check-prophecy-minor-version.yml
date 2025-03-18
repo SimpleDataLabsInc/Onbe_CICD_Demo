@@ -5,9 +5,9 @@ on:
     branches:
       - main
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.base_ref }}
-  cancel-in-progress: true
+# concurrency:
+#   group: ${{ github.workflow }}-${{ github.base_ref }}
+#   cancel-in-progress: true
 
 jobs:
   compare_minor_version:
