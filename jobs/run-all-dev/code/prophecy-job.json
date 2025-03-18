@@ -6,7 +6,7 @@
     "name" : "run-all-dev",
     "dagName" : "best_neil_Onbe_CICD_Demo_run_all_dev",
     "schedule" : "0/1 * * * *",
-    "enabled" : true,
+    "enabled" : false,
     "alerting" : {
       "emails" : "",
       "onStart" : false,
@@ -56,8 +56,8 @@
       "metadata" : {
         "label" : "dev",
         "slug" : "dev",
-        "x" : -4920,
-        "y" : -2340
+        "x" : -5620,
+        "y" : -2700
       },
       "ports" : {
         "inputs" : [ {
