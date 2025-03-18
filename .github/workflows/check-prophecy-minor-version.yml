@@ -62,6 +62,6 @@ jobs:
                   --path "$GITHUB_WORKSPACE" \
                   --branch "$(basename "$GITHUB_WORKSPACE")" \
                   --no-push
-              git push origin HEAD "$(git tag --contains "$GITHUB_HEAD_REF")"
+              git push origin $GITHUB_REF "$(git tag --contains "$GITHUB_HEAD_REF")"
               exit 1  # Fail the job to indicate changes were needed
           fi
