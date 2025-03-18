@@ -61,7 +61,7 @@ jobs:
               git add "$GITHUB_WORKSPACE"
               git commit -m "Auto bump minor version"
               git push origin "$GITHUB_HEAD_REF" --verbose
-              sleep 10 # wait for `synchronize` event
+              sleep 30 # wait for `synchronize` event
               # gh pr update-branch "$GITHUB_HEAD_REF"
               pipenv run \
                 pbt tag \
