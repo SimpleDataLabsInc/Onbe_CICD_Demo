@@ -22,6 +22,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.head_ref }}
+          token: ${{ secrets.VERSION_BUMPER_TOKEN }} # pending approval
       - run: |
           git fetch origin "$GITHUB_BASE_REF":"$GITHUB_BASE_REF"
           git branch --list --verbose
@@ -61,8 +62,6 @@ jobs:
               git add "$GITHUB_WORKSPACE"
               git commit -m "Auto bump minor version"
               git push origin "$GITHUB_HEAD_REF" --verbose
-              sleep 30 # wait for `synchronize` event
-              # gh pr update-branch "$GITHUB_HEAD_REF"
               pipenv run \
                 pbt tag \
                   --path "$GITHUB_WORKSPACE" \
