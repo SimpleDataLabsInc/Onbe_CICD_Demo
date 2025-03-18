@@ -58,12 +58,13 @@ jobs:
               # git checkout $GITHUB_REF
               git add "$GITHUB_WORKSPACE"
               git commit -m "Auto bump minor version"
-              git push origin HEAD --verbose
+              # git push origin HEAD --verbose
+              gh pr update-branch
               pipenv run \
                 pbt tag \
                   --path "$GITHUB_WORKSPACE" \
                   --branch "$(basename "$GITHUB_WORKSPACE")" \
                   --no-push
               git push origin "$(git tag --contains "$GITHUB_HEAD_REF")" --verbose
-              # exit 1  # Fail the job to indicate changes were needed
+              exit 1  # Fail the job to indicate changes were needed
           fi
