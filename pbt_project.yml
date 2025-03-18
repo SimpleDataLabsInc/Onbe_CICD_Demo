@@ -55,7 +55,7 @@ jobs:
       clusterMode:
         Multi: {}
       clusterId: null
-    enabled: false
+    enabled: true
     createdAt: '2025-03-13 21:26:32'
     author: best.neil@prophecy.io
     models: []
