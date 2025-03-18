@@ -55,6 +55,7 @@ jobs:
               git config \
                 --global user.email \
                   "github-actions[bot]@users.noreply.github.com"
+              git checkout $GITHUB_REF
               git add "$GITHUB_WORKSPACE"
               git commit -m "Auto bump minor version"
               pipenv run \
@@ -62,6 +63,6 @@ jobs:
                   --path "$GITHUB_WORKSPACE" \
                   --branch "$(basename "$GITHUB_WORKSPACE")" \
                   --no-push
-              git push origin $GITHUB_REF "$(git tag --contains "$GITHUB_HEAD_REF")"
+              git push origin HEAD "$(git tag --contains "$GITHUB_HEAD_REF")"
               exit 1  # Fail the job to indicate changes were needed
           fi
