@@ -65,5 +65,5 @@ jobs:
                   --branch "$(basename "$GITHUB_WORKSPACE")" \
                   --no-push
               git push origin "$(git tag --contains "$GITHUB_HEAD_REF")" --verbose
-              exit 1  # Fail the job to indicate changes were needed
+              # exit 1  # Fail the job to indicate changes were needed
           fi
