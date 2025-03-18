@@ -39,6 +39,8 @@ jobs:
           echo -n "Setup cache hit? : "
           echo ${{ steps.setup.outputs.cache-hit }}
       - name: Run versioning check and commit if changed
+        env:
+          GH_TOKEN: ${{ github.token }} # for GH CLI
         run: |
           if ! pipenv run \
             pbt versioning \
