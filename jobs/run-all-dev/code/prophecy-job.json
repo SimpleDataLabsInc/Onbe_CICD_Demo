@@ -56,8 +56,8 @@
       "metadata" : {
         "label" : "dev",
         "slug" : "dev",
-        "x" : -2560,
-        "y" : -1000
+        "x" : -3260,
+        "y" : -1360
       },
       "ports" : {
         "inputs" : [ {
