@@ -61,7 +61,7 @@ jobs:
               git add "$GITHUB_WORKSPACE"
               git commit -m "Auto bump minor version"
               # git push origin HEAD --verbose
-              gh pr update-branch
+              gh pr update-branch "$GITHUB_HEAD_REF"
               pipenv run \
                 pbt tag \
                   --path "$GITHUB_WORKSPACE" \
