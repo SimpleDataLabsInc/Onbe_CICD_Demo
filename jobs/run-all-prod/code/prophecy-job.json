@@ -1,7 +1,7 @@
 {
   "metainfo" : {
     "type" : "Prophecy",
-    "fabricId" : "22701",
+    "fabricId" : "23284",
     "jobId" : "jobs/run-all-prod",
     "name" : "run-all-prod",
     "dagName" : "best_neil_Onbe_CICD_Demo_run_all_prod",
@@ -89,7 +89,7 @@
         "gitSshUrl" : null,
         "indirectSelection" : null,
         "partialParse" : null,
-        "vars" : "{\"env\":\"{{ params.env_prod }}\"}",
+        "vars" : "{\"env\":\"{{ var.value.SNOWFLAKE_TARGET_ENV }}\"}",
         "isAdhocRunFromSameProject" : null,
         "customVersion" : true,
         "noPrint" : null,
