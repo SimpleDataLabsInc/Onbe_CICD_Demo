@@ -1,6 +1,6 @@
 name: Onbe_CICD_Demo
 description: ''
-version: 0.16.0-cc
+version: 0.16.1-cc
 author: null
 language: sql
 buildSystem: ''
