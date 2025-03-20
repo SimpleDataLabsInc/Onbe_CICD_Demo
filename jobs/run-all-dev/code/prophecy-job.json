@@ -1,10 +1,10 @@
 {
   "metainfo" : {
     "type" : "Prophecy",
-    "fabricId" : "22701",
+    "fabricId" : "22829",
     "jobId" : "jobs/run-all-dev",
     "name" : "run-all-dev",
-    "dagName" : "best_neil_Onbe_CICD_Demo_run_all_dev",
+    "dagName" : "lLgQa5tfrHCqW4zNoEfcWg_",
     "schedule" : "0/1 * * * *",
     "enabled" : true,
     "alerting" : {
@@ -17,6 +17,7 @@
     "processDefaultSettings" : {
       "retries" : 0,
       "ignore_first_depends_on_past" : true,
+      "pool" : "MIio4Toq",
       "do_xcom_push" : true
     },
     "maxActiveRuns" : 1,

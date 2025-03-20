@@ -1,4 +1,4 @@
-from best_neil_onbe_cicd_demo_run_all_prod.utils import *
+from eaw95yiucvwdp7cmyrsgqg_.utils import *
 
 def prod():
     from airflow.operators.python import PythonOperator
@@ -12,7 +12,7 @@ def prod():
         python_callable = invoke_dbt_runner,
         op_kwargs = {
           "is_adhoc_run_from_same_project": False,
-          "is_prophecy_managed": False,
+          "is_prophecy_managed": True,
           "run_deps": False,
           "run_seeds": True,
           "run_parents": False,
@@ -29,7 +29,9 @@ def prod():
           "select": "",
           "threads": "",
           "exclude": "",
-          "run_props": " --profile run_profile_snowflake --vars {\"env\":\"{{ params.env_prod }}\"}",
-          "envs": {"DBT_DATABRICKS_INVOCATION_ENV" : "prophecy", "DBT_PROFILES_DIR" : "/usr/local/airflow/dags"}
+          "run_props": " --profile run_profile --vars {\"env\":\"{{ params.env_prod }}\"}",
+          "envs": {"DBT_DATABRICKS_INVOCATION_ENV" : "prophecy"}, 
+          "git_token_secret": "cILGBclHff0aIZg1ZPUwgQ_", 
+          "dbt_profile_secret": "NzOYOhrwZlUSnUcoXeZlb"
         },
     )
