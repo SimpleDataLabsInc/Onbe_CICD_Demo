@@ -21,9 +21,9 @@ def prod():
           "run_mode": "project",
           "entity_kind": None,
           "entity_name": None,
-          "project_id": "43734",
+          "project_id": "43833",
           "git_entity": "branch",
-          "git_entity_value": "main",
+          "git_entity_value": "main-pma",
           "git_ssh_url": "https://github.com/SimpleDataLabsInc/Onbe_CICD_Demo",
           "git_sub_path": "",
           "select": "",
@@ -31,7 +31,7 @@ def prod():
           "exclude": "",
           "run_props": " --profile run_profile --vars {\"env\":\"{{ params.env_prod }}\"}",
           "envs": {"DBT_DATABRICKS_INVOCATION_ENV" : "prophecy"}, 
-          "git_token_secret": "cILGBclHff0aIZg1ZPUwgQ_", 
+          "git_token_secret": "kt3imNt_92ngdihJ8_o17g_", 
           "dbt_profile_secret": "NzOYOhrwZlUSnUcoXeZlb"
         },
     )

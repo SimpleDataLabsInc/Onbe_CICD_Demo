@@ -6,7 +6,7 @@
     "name" : "run-all-prod",
     "dagName" : "Eaw95yIUcvWdp7CmYrSGQg_",
     "schedule" : "0/1 * * * *",
-    "enabled" : true,
+    "enabled" : false,
     "alerting" : {
       "emails" : "",
       "onStart" : false,
@@ -95,7 +95,7 @@
         "customVersion" : true,
         "noPrint" : null,
         "quiet" : null,
-        "projectId" : "43734",
+        "projectId" : "43833",
         "runMode" : "project",
         "runOnlyModel" : false,
         "favorState" : null,
@@ -117,7 +117,7 @@
         "noWriteJson" : null,
         "printerWidth" : null,
         "sqlFabricId" : "22696",
-        "gitEntityValue" : "main",
+        "gitEntityValue" : "main-pma",
         "logFormat" : null,
         "runModelWithChildren" : false,
         "dbtProfileSecret" : null,
@@ -126,7 +126,7 @@
         "exclude" : null,
         "runDeps" : null,
         "loadingSnapshots" : false,
-        "gitEntityValueBranch" : "main",
+        "gitEntityValueBranch" : "main-pma",
         "noAnonymousUsageStats" : null,
         "selector" : null,
         "targetPath" : null,
@@ -135,27 +135,27 @@
         "currentProjectModels" : [ {
           "label" : "stg_customers",
           "value" : "stg_customers",
-          "id" : "43734/.prophecy/metadata/sqlmodels/stg_customers",
+          "id" : "43833/.prophecy/metadata/sqlmodels/stg_customers",
           "name" : "stg_customers"
         }, {
           "label" : "stg_payments",
           "value" : "stg_payments",
-          "id" : "43734/.prophecy/metadata/sqlmodels/stg_payments",
+          "id" : "43833/.prophecy/metadata/sqlmodels/stg_payments",
           "name" : "stg_payments"
         }, {
           "label" : "customers",
           "value" : "customers",
-          "id" : "43734/.prophecy/metadata/sqlmodels/customers",
+          "id" : "43833/.prophecy/metadata/sqlmodels/customers",
           "name" : "customers"
         }, {
           "label" : "orders",
           "value" : "orders",
-          "id" : "43734/.prophecy/metadata/sqlmodels/orders",
+          "id" : "43833/.prophecy/metadata/sqlmodels/orders",
           "name" : "orders"
         }, {
           "label" : "stg_orders",
           "value" : "stg_orders",
-          "id" : "43734/.prophecy/metadata/sqlmodels/stg_orders",
+          "id" : "43833/.prophecy/metadata/sqlmodels/stg_orders",
           "name" : "stg_orders"
         } ],
         "profilesDir" : null,
