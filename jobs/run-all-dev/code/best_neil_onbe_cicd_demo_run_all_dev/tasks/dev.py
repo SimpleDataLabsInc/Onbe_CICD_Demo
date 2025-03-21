@@ -29,7 +29,7 @@ def dev():
           "select": "",
           "threads": "",
           "exclude": "",
-          "run_props": " --profile snowflake --vars {\"env\":\"{{ env_var('SNOWFLAKE_TARGET_ENV') }}\"}",
-          "envs": {"DBT_DATABRICKS_INVOCATION_ENV" : "prophecy", "DBT_PROFILES_DIR" : "/home/airflow/gcs/data/"}
+          "run_props": " --profile snowflake --vars {\"env\":\"$SNOWFLAKE_TARGET_ENV\"}",
+          "envs": {"DBT_DATABRICKS_INVOCATION_ENV" : "prophecy", "DBT_PROFILES_DIR" : "/home/airflow/gcs/plugins/"}
         },
     )

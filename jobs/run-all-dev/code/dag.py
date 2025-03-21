@@ -16,7 +16,6 @@ with DAG(
     default_args = {"owner" : "Prophecy", "retries" : 0, "ignore_first_depends_on_past" : True, "do_xcom_push" : True}, 
     params = {'env_dev' : Param("""DEV""", type = "string", title = """env_dev""")}, 
     start_date = pendulum.today('UTC'), 
-    end_date = pendulum.datetime(2025, 3, 20, tz = "UTC"), 
     catchup = False, 
     max_active_runs = 1
 ) as dag:
