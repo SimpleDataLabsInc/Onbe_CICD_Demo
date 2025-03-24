@@ -36,8 +36,9 @@ jobs:
     sqlProjects:
     - '43627'
   jobs/run-all-dev:
-    name: run-all-dev
-    description: ''
+    name: run-all-models
+    description: Runs all Models in the designated Project.  See dynamic parameters
+      in Job config and Gem properties.
     fabricUID: 23283
     scheduler:
       Prophecy: {}

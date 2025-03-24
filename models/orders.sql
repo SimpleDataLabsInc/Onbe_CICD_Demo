@@ -1,7 +1,6 @@
 {{
   config({    
-    "database": 'ONBE_DEMO_' ~ var('env') ,
-    "schema": "PUBLIC"
+    "database": "ONBE_DEMO_{{ var(\"AIRFLOW_INSTANCE_ENV\") }}"
   })
 }}
 

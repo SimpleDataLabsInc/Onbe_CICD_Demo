@@ -1,6 +1,6 @@
 from best_neil_onbe_cicd_demo_run_all_dev.utils import *
 
-def dev():
+def Onbe_CICD_Demo():
     from airflow.operators.python import PythonOperator
     from datetime import timedelta
     import os
@@ -8,7 +8,7 @@ def dev():
     import tempfile
 
     return PythonOperator(
-        task_id = "dev",
+        task_id = "Onbe_CICD_Demo",
         python_callable = invoke_dbt_runner,
         op_kwargs = {
           "is_adhoc_run_from_same_project": False,
@@ -29,7 +29,7 @@ def dev():
           "select": "",
           "threads": "",
           "exclude": "",
-          "run_props": " --profile snowflake --vars {\"env\":\"{{ env_var('SNOWFLAKE_TARGET_ENV') }}\"}",
-          "envs": {"DBT_DATABRICKS_INVOCATION_ENV" : "prophecy", "DBT_PROFILES_DIR" : "/home/airflow/gcs/data/"}
+          "run_props": " --profile snowflake -t {{ var.value.AIRFLOW_INSTANCE_ENV }} --vars {\"env\":\"{{ var.value.AIRFLOW_INSTANCE_ENV }}\"}",
+          "envs": {"DBT_DATABRICKS_INVOCATION_ENV" : "prophecy", "DBT_PROFILES_DIR" : "/home/airflow/gcs/plugins/"}
         },
     )

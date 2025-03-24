@@ -3,7 +3,7 @@
     "type" : "Prophecy",
     "fabricId" : "23283",
     "jobId" : "jobs/run-all-dev",
-    "name" : "run-all-dev",
+    "name" : "run-all-models",
     "dagName" : "best_neil_Onbe_CICD_Demo_run_all_dev",
     "schedule" : "0/1 * * * *",
     "enabled" : true,
@@ -20,25 +20,15 @@
       "do_xcom_push" : true
     },
     "maxActiveRuns" : 1,
-    "endDate" : "2025-03-20",
     "catchup" : false,
     "scheduleTimeZone" : "UTC",
     "dagParams" : {
       "instances" : {
-        "default" : {
-          "env_dev" : "DEV"
-        }
+        "default" : { },
+        "dev" : { },
+        "prod" : { }
       },
-      "params" : {
-        "env_dev" : {
-          "type" : "StringParam",
-          "properties" : {
-            "title" : "env_dev",
-            "value" : "DEV",
-            "canBeNull" : false
-          }
-        }
-      },
+      "params" : { },
       "selected" : "default"
     },
     "airflowFunctions" : [ ],
@@ -54,8 +44,8 @@
       "id" : "hRqUliz94CZBzrpcpr_-a$$_VroIQIAFaAc-w_IF1f4X",
       "component" : "Model",
       "metadata" : {
-        "label" : "dev",
-        "slug" : "dev",
+        "label" : "Onbe_CICD_Demo",
+        "slug" : "Onbe_CICD_Demo",
         "x" : -6360,
         "y" : -3040
       },
@@ -89,7 +79,7 @@
         "gitSshUrl" : null,
         "indirectSelection" : null,
         "partialParse" : null,
-        "vars" : "{\"env\":\"{{ env_var('SNOWFLAKE_TARGET_ENV') }}\"}",
+        "vars" : "{\"env\":\"{{ var.value.AIRFLOW_INSTANCE_ENV }}\"}",
         "isAdhocRunFromSameProject" : null,
         "customVersion" : false,
         "noPrint" : null,
@@ -121,7 +111,7 @@
         "runModelWithChildren" : false,
         "dbtProfileSecret" : null,
         "gitEntityValueCommit" : null,
-        "target" : null,
+        "target" : "{{ var.value.AIRFLOW_INSTANCE_ENV }}",
         "exclude" : null,
         "runDeps" : null,
         "loadingSnapshots" : false,

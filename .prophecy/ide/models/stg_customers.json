@@ -2,14 +2,14 @@
   "id" : "stg_customers",
   "metainfo" : {
     "label" : "stg_customers",
-    "autoLayout" : false,
+    "autoLayout" : true,
     "staleState" : "none",
     "sourceSuggestions" : {
       "sources" : [ ]
     },
     "graphConfig" : {
       "entityConfig" : {
-        "database" : "'ONBE_DEMO_' ~ var('env') ",
+        "database" : "\"ONBE_DEMO_{{ var(\\\"AIRFLOW_INSTANCE_ENV\\\") }}\"",
         "type" : "ModelConfig"
       },
       "userDefinedConfig" : {
@@ -19,15 +19,14 @@
     "version" : 3
   },
   "processes" : {
-    "source##uo6BzVCa" : {
-      "id" : "source##uo6BzVCa",
+    "source##S0MQKRgm" : {
+      "id" : "source##S0MQKRgm",
       "component" : "Seed",
       "metadata" : {
         "label" : "source",
-        "x" : 20,
-        "y" : 20,
         "phase" : 0,
-        "comment" : "-\n    Normally we would select from the table here, but we are using seeds to load\n    our data in this project\n    "
+        "comment" : "-\n  Normally we would select from the table here, but we are using seeds to load\n  our data in this project\n  ",
+        "isLabelGrayed" : false
       },
       "properties" : {
         "table" : {
@@ -38,70 +37,70 @@
       "ports" : {
         "inputs" : [ ],
         "outputs" : [ {
-          "id" : "fMKEHMdW",
+          "id" : "EZce2YfE",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
-      }
+      },
+      "index" : 0
     },
-    "renamed##bwCzxFyc" : {
-      "id" : "renamed##bwCzxFyc",
+    "renamed##QhJCY6re" : {
+      "id" : "renamed##QhJCY6re",
       "component" : "Reformat",
       "metadata" : {
         "label" : "renamed",
-        "x" : 220,
-        "y" : 20,
         "phase" : 0,
-        "macroDependencies" : [ ]
+        "macroDependencies" : [ ],
+        "isLabelGrayed" : false
       },
       "properties" : {
-        "columnsSelector" : [ "GGVzKDtR##id", "GGVzKDtR##first_name", "GGVzKDtR##last_name" ],
+        "columnsSelector" : [ ],
         "expressions" : [ {
           "expression" : {
             "expression" : "id"
           },
-          "alias" : "customer_id"
+          "alias" : "customer_id",
+          "_row_id" : "803788973"
         }, {
           "expression" : {
             "expression" : "first_name"
-          }
+          },
+          "_row_id" : "1487532738"
         }, {
           "expression" : {
             "expression" : "last_name"
-          }
+          },
+          "_row_id" : "333946112"
         } ]
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "GGVzKDtR",
+          "id" : "cPttAwVo",
           "slug" : "source"
         } ],
         "outputs" : [ {
-          "id" : "WKPQGmh9",
+          "id" : "FpZKEdPH",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
-      }
+      },
+      "index" : 1
     },
-    "stg_customers##t1q0Y2QJ" : {
-      "id" : "stg_customers##t1q0Y2QJ",
+    "final##e6Brx8XY" : {
+      "id" : "final##e6Brx8XY",
       "component" : "TargetModel",
       "metadata" : {
         "label" : "stg_customers",
-        "x" : 420,
-        "y" : 20,
         "phase" : 0,
-        "macroDependencies" : [ ],
-        "comment" : "Prepares customer data from a renamed source for further analysis.",
-        "autoUpdateComment" : true
+        "isLabelGrayed" : false
       },
       "properties" : {
         "customQueryDisabled" : true,
         "customQuery" : false,
         "incrementalEditorDisabled" : true,
-        "query" : "SELECT * \n\nFROM renamed\n",
+        "query" : "SELECT *\n\nFROM renamed\n",
         "incrementalKey" : false,
         "incremental" : {
           "expression" : "true"
@@ -109,30 +108,31 @@
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "u6TwSvcr",
+          "id" : "x5H4tgF1",
           "slug" : "renamed"
         } ],
         "outputs" : [ {
-          "id" : "DJFOffT8",
+          "id" : "VTNbLn0p",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
-      }
+      },
+      "index" : 2
     }
   },
   "connections" : [ {
-    "id" : "qKabJTeP",
-    "source" : "source##uo6BzVCa",
-    "sourcePort" : "fMKEHMdW",
-    "target" : "renamed##bwCzxFyc",
-    "targetPort" : "GGVzKDtR"
+    "id" : "zy0aXDrV",
+    "source" : "source##S0MQKRgm",
+    "sourcePort" : "EZce2YfE",
+    "target" : "renamed##QhJCY6re",
+    "targetPort" : "cPttAwVo"
   }, {
-    "id" : "XjIeELnN",
-    "source" : "renamed##bwCzxFyc",
-    "sourcePort" : "WKPQGmh9",
-    "target" : "stg_customers##t1q0Y2QJ",
-    "targetPort" : "u6TwSvcr"
+    "id" : "HMWRn9A6",
+    "source" : "renamed##QhJCY6re",
+    "sourcePort" : "FpZKEdPH",
+    "target" : "final##e6Brx8XY",
+    "targetPort" : "x5H4tgF1"
   } ],
   "component" : "Model"
 }

@@ -2,14 +2,14 @@
   "id" : "stg_orders",
   "metainfo" : {
     "label" : "stg_orders",
-    "autoLayout" : false,
+    "autoLayout" : true,
     "staleState" : "none",
     "sourceSuggestions" : {
       "sources" : [ ]
     },
     "graphConfig" : {
       "entityConfig" : {
-        "database" : "'ONBE_DEMO_' ~ var('env') ",
+        "database" : "\"ONBE_DEMO_{{ var(\\\"AIRFLOW_INSTANCE_ENV\\\") }}\"",
         "type" : "ModelConfig"
       },
       "userDefinedConfig" : {
@@ -19,15 +19,14 @@
     "version" : 3
   },
   "processes" : {
-    "source##BjZjSZYF" : {
-      "id" : "source##BjZjSZYF",
+    "source##pcvDQX9M" : {
+      "id" : "source##pcvDQX9M",
       "component" : "Seed",
       "metadata" : {
         "label" : "source",
-        "x" : 20,
-        "y" : 20,
         "phase" : 0,
-        "comment" : "-\n    Normally we would select from the table here, but we are using seeds to load\n    our data in this project\n    "
+        "comment" : "-\n  Normally we would select from the table here, but we are using seeds to load\n  our data in this project\n  ",
+        "isLabelGrayed" : false
       },
       "properties" : {
         "table" : {
@@ -38,75 +37,76 @@
       "ports" : {
         "inputs" : [ ],
         "outputs" : [ {
-          "id" : "bLz616WQ",
+          "id" : "glWYJinr",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
-      }
+      },
+      "index" : 0
     },
-    "renamed##WMOL3k8c" : {
-      "id" : "renamed##WMOL3k8c",
+    "renamed##torKjBOE" : {
+      "id" : "renamed##torKjBOE",
       "component" : "Reformat",
       "metadata" : {
         "label" : "renamed",
-        "x" : 220,
-        "y" : 20,
         "phase" : 0,
-        "macroDependencies" : [ ]
+        "macroDependencies" : [ ],
+        "isLabelGrayed" : false
       },
       "properties" : {
-        "columnsSelector" : [ "xipqqzfv##id", "xipqqzfv##user_id", "xipqqzfv##order_date", "xipqqzfv##status" ],
+        "columnsSelector" : [ ],
         "expressions" : [ {
           "expression" : {
             "expression" : "id"
           },
-          "alias" : "order_id"
+          "alias" : "order_id",
+          "_row_id" : "219299930"
         }, {
           "expression" : {
             "expression" : "user_id"
           },
-          "alias" : "customer_id"
+          "alias" : "customer_id",
+          "_row_id" : "1357892069"
         }, {
           "expression" : {
             "expression" : "order_date"
-          }
+          },
+          "_row_id" : "1742519263"
         }, {
           "expression" : {
             "expression" : "status"
-          }
+          },
+          "_row_id" : "572495043"
         } ]
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "xipqqzfv",
+          "id" : "W36bWw75",
           "slug" : "source"
         } ],
         "outputs" : [ {
-          "id" : "dL4mwz1v",
+          "id" : "fPLJhKQP",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
-      }
+      },
+      "index" : 1
     },
-    "stg_orders##FDsGyIou" : {
-      "id" : "stg_orders##FDsGyIou",
+    "final##nwPsAzVW" : {
+      "id" : "final##nwPsAzVW",
       "component" : "TargetModel",
       "metadata" : {
         "label" : "stg_orders",
-        "x" : 420,
-        "y" : 20,
         "phase" : 0,
-        "macroDependencies" : [ ],
-        "comment" : "Prepares a staging area for orders by renaming the dataset for further processing.",
-        "autoUpdateComment" : true
+        "isLabelGrayed" : false
       },
       "properties" : {
         "customQueryDisabled" : true,
         "customQuery" : false,
         "incrementalEditorDisabled" : true,
-        "query" : "SELECT * \n\nFROM renamed\n",
+        "query" : "SELECT *\n\nFROM renamed\n",
         "incrementalKey" : false,
         "incremental" : {
           "expression" : "true"
@@ -114,30 +114,31 @@
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "islaOCKO",
+          "id" : "afD8cEVk",
           "slug" : "renamed"
         } ],
         "outputs" : [ {
-          "id" : "i2sExHE6",
+          "id" : "C4gP7usa",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
-      }
+      },
+      "index" : 2
     }
   },
   "connections" : [ {
-    "id" : "Ej5e8NmQ",
-    "source" : "source##BjZjSZYF",
-    "sourcePort" : "bLz616WQ",
-    "target" : "renamed##WMOL3k8c",
-    "targetPort" : "xipqqzfv"
+    "id" : "AyBFWUy4",
+    "source" : "source##pcvDQX9M",
+    "sourcePort" : "glWYJinr",
+    "target" : "renamed##torKjBOE",
+    "targetPort" : "W36bWw75"
   }, {
-    "id" : "qZzcHcvB",
-    "source" : "renamed##WMOL3k8c",
-    "sourcePort" : "dL4mwz1v",
-    "target" : "stg_orders##FDsGyIou",
-    "targetPort" : "islaOCKO"
+    "id" : "B3DF9u9L",
+    "source" : "renamed##torKjBOE",
+    "sourcePort" : "fPLJhKQP",
+    "target" : "final##nwPsAzVW",
+    "targetPort" : "afD8cEVk"
   } ],
   "component" : "Model"
 }

@@ -2,14 +2,14 @@
   "id" : "stg_payments",
   "metainfo" : {
     "label" : "stg_payments",
-    "autoLayout" : false,
+    "autoLayout" : true,
     "staleState" : "none",
     "sourceSuggestions" : {
       "sources" : [ ]
     },
     "graphConfig" : {
       "entityConfig" : {
-        "database" : "'ONBE_DEMO_' ~ var('env') ",
+        "database" : "\"ONBE_DEMO_{{ var(\\\"AIRFLOW_INSTANCE_ENV\\\") }}\"",
         "type" : "ModelConfig"
       },
       "userDefinedConfig" : {
@@ -19,15 +19,14 @@
     "version" : 3
   },
   "processes" : {
-    "source##l0P0bns8" : {
-      "id" : "source##l0P0bns8",
+    "source##TLjs7E8s" : {
+      "id" : "source##TLjs7E8s",
       "component" : "Seed",
       "metadata" : {
         "label" : "source",
-        "x" : 20,
-        "y" : 20,
         "phase" : 0,
-        "comment" : "-\n    Normally we would select from the table here, but we are using seeds to load\n    our data in this project\n    "
+        "comment" : "-\n  Normally we would select from the table here, but we are using seeds to load\n  our data in this project\n  ",
+        "isLabelGrayed" : false
       },
       "properties" : {
         "table" : {
@@ -38,75 +37,76 @@
       "ports" : {
         "inputs" : [ ],
         "outputs" : [ {
-          "id" : "k0WE01K4",
+          "id" : "SmFC3ViH",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
-      }
+      },
+      "index" : 0
     },
-    "renamed##z2vO5xkN" : {
-      "id" : "renamed##z2vO5xkN",
+    "renamed##ZspGDYLt" : {
+      "id" : "renamed##ZspGDYLt",
       "component" : "Reformat",
       "metadata" : {
         "label" : "renamed",
-        "x" : 220,
-        "y" : 20,
         "phase" : 0,
-        "macroDependencies" : [ ]
+        "macroDependencies" : [ ],
+        "isLabelGrayed" : false
       },
       "properties" : {
-        "columnsSelector" : [ "I4z62jzh##id", "I4z62jzh##order_id", "I4z62jzh##payment_method", "I4z62jzh##amount" ],
+        "columnsSelector" : [ ],
         "expressions" : [ {
           "expression" : {
             "expression" : "id"
           },
-          "alias" : "payment_id"
+          "alias" : "payment_id",
+          "_row_id" : "1686936462"
         }, {
           "expression" : {
             "expression" : "order_id"
-          }
+          },
+          "_row_id" : "1521590908"
         }, {
           "expression" : {
             "expression" : "payment_method"
-          }
+          },
+          "_row_id" : "2140362259"
         }, {
           "expression" : {
             "expression" : "-- `amount` is currently stored in cents, so we convert it to dollars\namount / 100"
           },
-          "alias" : "amount"
+          "alias" : "amount",
+          "_row_id" : "388396401"
         } ]
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "I4z62jzh",
+          "id" : "cDDGQWYU",
           "slug" : "source"
         } ],
         "outputs" : [ {
-          "id" : "dvNxlrgk",
+          "id" : "BfScl93m",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
-      }
+      },
+      "index" : 1
     },
-    "stg_payments##PgcnRHDq" : {
-      "id" : "stg_payments##PgcnRHDq",
+    "final##rBEtCpTV" : {
+      "id" : "final##rBEtCpTV",
       "component" : "TargetModel",
       "metadata" : {
         "label" : "stg_payments",
-        "x" : 420,
-        "y" : 20,
         "phase" : 0,
-        "macroDependencies" : [ ],
-        "comment" : "Prepares payment data for further processing by renaming the dataset.",
-        "autoUpdateComment" : true
+        "isLabelGrayed" : false
       },
       "properties" : {
         "customQueryDisabled" : true,
         "customQuery" : false,
         "incrementalEditorDisabled" : true,
-        "query" : "SELECT * \n\nFROM renamed\n",
+        "query" : "SELECT *\n\nFROM renamed\n",
         "incrementalKey" : false,
         "incremental" : {
           "expression" : "true"
@@ -114,30 +114,31 @@
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "dtYTHFhD",
+          "id" : "EWzOVTSU",
           "slug" : "renamed"
         } ],
         "outputs" : [ {
-          "id" : "wR47vX6j",
+          "id" : "bOIWvqui",
           "slug" : "out"
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
-      }
+      },
+      "index" : 2
     }
   },
   "connections" : [ {
-    "id" : "rUVvSFOY",
-    "source" : "source##l0P0bns8",
-    "sourcePort" : "k0WE01K4",
-    "target" : "renamed##z2vO5xkN",
-    "targetPort" : "I4z62jzh"
+    "id" : "zNWxaJS2",
+    "source" : "source##TLjs7E8s",
+    "sourcePort" : "SmFC3ViH",
+    "target" : "renamed##ZspGDYLt",
+    "targetPort" : "cDDGQWYU"
   }, {
-    "id" : "bFWSzIpN",
-    "source" : "renamed##z2vO5xkN",
-    "sourcePort" : "dvNxlrgk",
-    "target" : "stg_payments##PgcnRHDq",
-    "targetPort" : "dtYTHFhD"
+    "id" : "G7MOBC0e",
+    "source" : "renamed##ZspGDYLt",
+    "sourcePort" : "BfScl93m",
+    "target" : "final##rBEtCpTV",
+    "targetPort" : "EWzOVTSU"
   } ],
   "component" : "Model"
 }

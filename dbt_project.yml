@@ -7,7 +7,7 @@ require-dbt-version:
 - ">=1.0.0"
 - "<2.0.0"
 version: "0.16.0"
-profile: "run_profile_snowflake"
+profile: "snowflake"
 
 # ==================
 # File Path Configs
@@ -32,8 +32,7 @@ target-path: "target"
 # ==================
 # Variable Configs
 # ==================
-vars:
-  env: "{DEV,PROD}"
+vars: {}
 
 # ==================
 # Model Configs
