@@ -28,7 +28,7 @@
           "DBT_TARGET" : "DEV"
         },
         "dev" : {
-          "DBT_TARGET" : ""
+          "DBT_TARGET" : "DEV"
         },
         "prod" : {
           "DBT_TARGET" : "PROD"
@@ -61,8 +61,8 @@
       "metadata" : {
         "label" : "Run_All_Models",
         "slug" : "Run_All_Models",
-        "x" : -6360,
-        "y" : -3040
+        "x" : -6980,
+        "y" : -3340
       },
       "ports" : {
         "inputs" : [ {
@@ -170,40 +170,7 @@
       },
       "connections" : [ ],
       "processes" : { }
-    },
-    "ecsUqmU_LYD-gmXfM4GQ1$$dNU0vOMIUGaCkKHxvGk4d" : {
-      "id" : "ecsUqmU_LYD-gmXfM4GQ1$$dNU0vOMIUGaCkKHxvGk4d",
-      "component" : "Branch",
-      "metadata" : {
-        "label" : "Check_DBT_Target",
-        "slug" : "Check_DBT_Target",
-        "x" : -6540,
-        "y" : -3040
-      },
-      "ports" : {
-        "inputs" : [ {
-          "id" : "kg2PEb59uyiB94J3WXa4n$$OcJBqIXDWkxccyhlSgHfF",
-          "slug" : ""
-        } ],
-        "outputs" : [ {
-          "id" : "PzcerkbNH4JqrYd4Za5AE$$KB7b4MpL7VZUKiRzbf6KI",
-          "slug" : ""
-        } ]
-      },
-      "settings" : { },
-      "properties" : {
-        "callback" : "def check_dbt_target():\n    from airflow.models import Variable\n    if Variable.get(\"AIRFLOW_INSTANCE_ENV\") == \"{{ params.DBT_TARGET }}\":\n        return \"Run_All_Models\"\n    else:\n        return None",
-        "taskId" : null
-      },
-      "connections" : [ ],
-      "processes" : { }
     }
   },
-  "connections" : [ {
-    "id" : "b0rFNAXwozCymCjN1y0HW$$gsMNsjvgl_iIFXChPzNe9",
-    "source" : "ecsUqmU_LYD-gmXfM4GQ1$$dNU0vOMIUGaCkKHxvGk4d",
-    "target" : "hRqUliz94CZBzrpcpr_-a$$_VroIQIAFaAc-w_IF1f4X",
-    "sourcePort" : "PzcerkbNH4JqrYd4Za5AE$$KB7b4MpL7VZUKiRzbf6KI",
-    "targetPort" : "Cbe35yjU0rOUK2AyHdD2c$$tPoSbbBNoiCxPNR6ZjZ16"
-  } ]
+  "connections" : [ ]
 }
