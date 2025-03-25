@@ -1,7 +1,7 @@
 {
   "metainfo" : {
     "type" : "Prophecy",
-    "fabricId" : "23283",
+    "fabricId" : "23284",
     "jobId" : "jobs/run-all-dev",
     "name" : "run-all-models",
     "dagName" : "Onbe_CICD_Demo_run_all_models",
@@ -25,7 +25,7 @@
     "dagParams" : {
       "instances" : {
         "default" : {
-          "DBT_TARGET" : "DEV"
+          "DBT_TARGET" : "PROD"
         },
         "dev" : {
           "DBT_TARGET" : "DEV"
@@ -39,7 +39,7 @@
           "type" : "StringParam",
           "properties" : {
             "title" : "DBT_TARGET",
-            "value" : "DEV",
+            "value" : "PROD",
             "canBeNull" : false
           }
         }
@@ -120,7 +120,7 @@
         "noVersionCheck" : null,
         "noWriteJson" : null,
         "printerWidth" : null,
-        "sqlFabricId" : "22696",
+        "sqlFabricId" : "23673",
         "gitEntityValue" : "composer-dev",
         "logFormat" : null,
         "runModelWithChildren" : false,
