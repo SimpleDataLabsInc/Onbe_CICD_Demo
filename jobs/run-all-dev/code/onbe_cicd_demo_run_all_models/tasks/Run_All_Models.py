@@ -1,4 +1,4 @@
-from best_neil_onbe_cicd_demo_run_all_dev.utils import *
+from onbe_cicd_demo_run_all_models.utils import *
 
 def Run_All_Models():
     from airflow.operators.python import PythonOperator
@@ -30,6 +30,6 @@ def Run_All_Models():
           "threads": "",
           "exclude": "",
           "run_props": " --profile snowflake -t {{ params.DBT_TARGET }} --vars {\"DBT_TARGET\":\"{{ var.value.AIRFLOW_INSTANCE_ENV }}\"}",
-          "envs": {"DBT_DATABRICKS_INVOCATION_ENV" : "prophecy", "DBT_PROFILES_DIR" : "/home/airflow/gcs/plugins/"}
+          "envs": {"DBT_DATABRICKS_INVOCATION_ENV" : "prophecy", "DBT_PROFILES_DIR" : "/home/airflow/gcs/data"}
         },
     )
