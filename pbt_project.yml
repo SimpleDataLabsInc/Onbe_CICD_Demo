@@ -9,32 +9,6 @@ pipelines: {}
 datasets: {}
 templates: {}
 jobs:
-  jobs/run-all-prod:
-    name: run-all-prod
-    description: ''
-    fabricUID: 23284
-    scheduler:
-      Prophecy: {}
-    cloudProvider: null
-    jobSize: null
-    scheduleCron: 0/1 * * * *
-    timeout: null
-    alerting:
-      emails: ''
-      onStart: false
-      onSuccess: false
-      onFailure: false
-    pipelines: []
-    jobClusterMode:
-      clusterMode:
-        Multi: {}
-      clusterId: null
-    enabled: false
-    createdAt: '2025-03-03 19:11:35'
-    author: best.neil@prophecy.io
-    models: []
-    sqlProjects:
-    - '43627'
   jobs/run-all-dev:
     name: run-all-models
     description: Runs all Models in the designated Project.  See dynamic parameters
