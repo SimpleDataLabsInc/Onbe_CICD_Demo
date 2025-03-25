@@ -1,6 +1,6 @@
 {{
   config({    
-    "database": "ONBE_DEMO_{{ var(\"AIRFLOW_INSTANCE_ENV\") }}"
+    "database": 'ONBE_DEMO_' ~ var('DBT_TARGET') 
   })
 }}
 

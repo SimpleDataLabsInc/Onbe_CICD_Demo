@@ -32,7 +32,8 @@ target-path: "target"
 # ==================
 # Variable Configs
 # ==================
-vars: {}
+vars:
+  DBT_TARGET: "{DEV,PROD}"
 
 # ==================
 # Model Configs

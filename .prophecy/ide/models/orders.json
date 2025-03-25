@@ -9,7 +9,7 @@
     },
     "graphConfig" : {
       "entityConfig" : {
-        "database" : "\"ONBE_DEMO_{{ var(\\\"AIRFLOW_INSTANCE_ENV\\\") }}\"",
+        "database" : "'ONBE_DEMO_' ~ var('DBT_TARGET') ",
         "type" : "ModelConfig"
       },
       "userDefinedConfig" : {
@@ -150,13 +150,16 @@
         "x" : 620,
         "y" : 120,
         "phase" : 0,
+        "macroDependencies" : [ ],
+        "comment" : "Retrieves all records from the final orders dataset.",
+        "autoUpdateComment" : true,
         "isLabelGrayed" : false
       },
       "properties" : {
         "customQueryDisabled" : true,
         "customQuery" : false,
         "incrementalEditorDisabled" : true,
-        "query" : "SELECT *\n\nFROM final\n",
+        "query" : "SELECT * \n\nFROM final\n",
         "incrementalKey" : false,
         "incremental" : {
           "expression" : "true"
@@ -173,8 +176,7 @@
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
-      },
-      "index" : 4
+      }
     },
     "final##MLJElLEi" : {
       "id" : "final##MLJElLEi",

@@ -2,14 +2,14 @@
   "id" : "stg_customers",
   "metainfo" : {
     "label" : "stg_customers",
-    "autoLayout" : true,
+    "autoLayout" : false,
     "staleState" : "none",
     "sourceSuggestions" : {
       "sources" : [ ]
     },
     "graphConfig" : {
       "entityConfig" : {
-        "database" : "\"ONBE_DEMO_{{ var(\\\"AIRFLOW_INSTANCE_ENV\\\") }}\"",
+        "database" : "'ONBE_DEMO_' ~ var('DBT_TARGET') ",
         "type" : "ModelConfig"
       },
       "userDefinedConfig" : {
@@ -24,6 +24,8 @@
       "component" : "Seed",
       "metadata" : {
         "label" : "source",
+        "x" : 20,
+        "y" : 20,
         "phase" : 0,
         "comment" : "-\n  Normally we would select from the table here, but we are using seeds to load\n  our data in this project\n  ",
         "isLabelGrayed" : false
@@ -50,6 +52,8 @@
       "component" : "Reformat",
       "metadata" : {
         "label" : "renamed",
+        "x" : 220,
+        "y" : 20,
         "phase" : 0,
         "macroDependencies" : [ ],
         "isLabelGrayed" : false
@@ -93,14 +97,19 @@
       "component" : "TargetModel",
       "metadata" : {
         "label" : "stg_customers",
+        "x" : 420,
+        "y" : 20,
         "phase" : 0,
+        "macroDependencies" : [ ],
+        "comment" : "Prepares customer data from a renamed source for further analysis.",
+        "autoUpdateComment" : true,
         "isLabelGrayed" : false
       },
       "properties" : {
         "customQueryDisabled" : true,
         "customQuery" : false,
         "incrementalEditorDisabled" : true,
-        "query" : "SELECT *\n\nFROM renamed\n",
+        "query" : "SELECT * \n\nFROM renamed\n",
         "incrementalKey" : false,
         "incremental" : {
           "expression" : "true"
@@ -117,8 +126,7 @@
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
-      },
-      "index" : 2
+      }
     }
   },
   "connections" : [ {

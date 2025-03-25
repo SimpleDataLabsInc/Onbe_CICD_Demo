@@ -2,14 +2,14 @@
   "id" : "customers",
   "metainfo" : {
     "label" : "customers",
-    "autoLayout" : true,
+    "autoLayout" : false,
     "staleState" : "none",
     "sourceSuggestions" : {
       "sources" : [ ]
     },
     "graphConfig" : {
       "entityConfig" : {
-        "database" : "\"ONBE_DEMO_{{ var(\\\"AIRFLOW_INSTANCE_ENV\\\") }}\"",
+        "database" : "'ONBE_DEMO_' ~ var('DBT_TARGET') ",
         "type" : "ModelConfig"
       },
       "userDefinedConfig" : {
@@ -24,6 +24,8 @@
       "component" : "SQLStatement",
       "metadata" : {
         "label" : "customer_payments",
+        "x" : 280,
+        "y" : 420,
         "phase" : 0,
         "isLabelGrayed" : false
       },
@@ -57,6 +59,8 @@
       "component" : "Model",
       "metadata" : {
         "label" : "payments",
+        "x" : 20,
+        "y" : 220,
         "phase" : 0,
         "isLabelGrayed" : false
       },
@@ -82,6 +86,8 @@
       "component" : "Model",
       "metadata" : {
         "label" : "orders",
+        "x" : 20,
+        "y" : 420,
         "phase" : 0,
         "isLabelGrayed" : false
       },
@@ -107,6 +113,8 @@
       "component" : "Aggregate",
       "metadata" : {
         "label" : "customer_orders",
+        "x" : 280,
+        "y" : 220,
         "phase" : 0,
         "macroDependencies" : [ ],
         "isLabelGrayed" : false
@@ -168,6 +176,8 @@
       "component" : "Join",
       "metadata" : {
         "label" : "final",
+        "x" : 480,
+        "y" : 220,
         "phase" : 0,
         "macroDependencies" : [ ],
         "isLabelGrayed" : false
@@ -253,14 +263,19 @@
       "component" : "TargetModel",
       "metadata" : {
         "label" : "customers",
+        "x" : 680,
+        "y" : 220,
         "phase" : 0,
+        "macroDependencies" : [ ],
+        "comment" : "Retrieves all customer data from the final dataset.",
+        "autoUpdateComment" : true,
         "isLabelGrayed" : false
       },
       "properties" : {
         "customQueryDisabled" : true,
         "customQuery" : false,
         "incrementalEditorDisabled" : true,
-        "query" : "SELECT *\n\nFROM final\n",
+        "query" : "SELECT * \n\nFROM final\n",
         "incrementalKey" : false,
         "incremental" : {
           "expression" : "true"
@@ -277,14 +292,15 @@
         } ],
         "isCustomOutputSchema" : false,
         "autoUpdateOnRun" : false
-      },
-      "index" : 6
+      }
     },
     "customers##noxJj13M" : {
       "id" : "customers##noxJj13M",
       "component" : "Model",
       "metadata" : {
         "label" : "customers",
+        "x" : 280,
+        "y" : 20,
         "phase" : 0,
         "isLabelGrayed" : false
       },
