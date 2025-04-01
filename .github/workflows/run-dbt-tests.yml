@@ -4,9 +4,12 @@ on:
     branches:
       - main
       - dev
+      - composer
+      - composer-dev
     types: [opened, synchronize]
-  # push:
-  #   branches:
+  push:
+    branches:
+      - composer-dev
   #     - dev-gha
 
 jobs:
