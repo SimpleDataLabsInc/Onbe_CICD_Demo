@@ -25,6 +25,12 @@
       "instances" : {
         "default" : {
           "DBT_TARGET" : "DEV"
+        },
+        "prod" : {
+          "DBT_TARGET" : "PROD"
+        },
+        "dev" : {
+          "DBT_TARGET" : ""
         }
       },
       "params" : {
