@@ -1,0 +1,168 @@
+{
+  "metainfo" : {
+    "type" : "Composer",
+    "fabricId" : "23283",
+    "jobId" : "jobs/run-all-models",
+    "name" : "run-all-models",
+    "dagName" : "Onbe_CICD_Demo_run_all_models",
+    "schedule" : "0/1 * * * *",
+    "enabled" : false,
+    "alerting" : {
+      "emails" : "",
+      "onStart" : false,
+      "onSuccess" : false,
+      "onFailure" : false
+    },
+    "maxConcurrentRuns" : 1,
+    "processDefaultSettings" : {
+      "ignore_first_depends_on_past" : true,
+      "do_xcom_push" : true
+    },
+    "maxActiveRuns" : 1,
+    "catchup" : false,
+    "scheduleTimeZone" : "UTC",
+    "dagParams" : {
+      "instances" : {
+        "default" : {
+          "DBT_TARGET" : "DEV"
+        }
+      },
+      "params" : {
+        "DBT_TARGET" : {
+          "type" : "StringParam",
+          "properties" : {
+            "title" : "DBT_TARGET",
+            "value" : "DEV",
+            "canBeNull" : false
+          }
+        }
+      },
+      "selected" : "default"
+    },
+    "airflowFunctions" : [ ],
+    "dynamicPipelineStatus" : {
+      "databricks" : false,
+      "dataproc" : false,
+      "emr" : false,
+      "onprem" : false
+    }
+  },
+  "processes" : {
+    "PKD7lcltbefBDkjYFLXR4$$wGUR1qwe_o_hnJs7IEBx0" : {
+      "id" : "PKD7lcltbefBDkjYFLXR4$$wGUR1qwe_o_hnJs7IEBx0",
+      "component" : "Model",
+      "metadata" : {
+        "label" : "Model",
+        "slug" : "Model",
+        "x" : -1520,
+        "y" : -600
+      },
+      "ports" : {
+        "inputs" : [ {
+          "id" : "X2ZTpZqfEHNL18_QtZslx$$8prwdjve_b7-rAc9cKZi2",
+          "slug" : ""
+        } ],
+        "outputs" : [ {
+          "id" : "rvzgmT_ZjX7ptgsWIhkkP$$xRUM-dwNzL94Yvd89xz3C",
+          "slug" : ""
+        } ]
+      },
+      "settings" : { },
+      "properties" : {
+        "entityId" : null,
+        "cacheSelectedOnly" : null,
+        "gitSubPath" : null,
+        "runModelWithParents" : false,
+        "defer" : null,
+        "noDefer" : null,
+        "runSeed" : true,
+        "gitEntity" : "branch",
+        "noPartialParse" : null,
+        "model" : null,
+        "warnErrorOptions" : null,
+        "gitTokenSecret" : null,
+        "state" : null,
+        "useExperimentalParser" : null,
+        "currentProjectSnapshots" : null,
+        "gitSshUrl" : null,
+        "indirectSelection" : null,
+        "partialParse" : null,
+        "vars" : null,
+        "isAdhocRunFromSameProject" : null,
+        "noPrint" : null,
+        "quiet" : null,
+        "projectId" : "43735",
+        "runMode" : "project",
+        "runOnlyModel" : false,
+        "favorState" : null,
+        "failFast" : null,
+        "noStaticParser" : null,
+        "loadingModels" : false,
+        "runTest" : true,
+        "select" : null,
+        "recordTimingInfo" : null,
+        "fullRefresh" : null,
+        "entityName" : null,
+        "noCacheSelectedOnly" : null,
+        "gitEntityValueTag" : null,
+        "noFavorState" : null,
+        "snapshot" : null,
+        "isProphecyManaged" : false,
+        "profile" : null,
+        "noVersionCheck" : null,
+        "noWriteJson" : null,
+        "printerWidth" : null,
+        "sqlFabricId" : "22696",
+        "gitEntityValue" : null,
+        "logFormat" : null,
+        "runModelWithChildren" : false,
+        "dbtProfileSecret" : null,
+        "gitEntityValueCommit" : null,
+        "target" : null,
+        "exclude" : null,
+        "runDeps" : null,
+        "loadingSnapshots" : false,
+        "gitEntityValueBranch" : null,
+        "noAnonymousUsageStats" : null,
+        "selector" : null,
+        "targetPath" : null,
+        "threads" : null,
+        "warnError" : null,
+        "currentProjectModels" : [ {
+          "label" : "stg_customers",
+          "value" : "stg_customers",
+          "id" : "43735/.prophecy/metadata/sqlmodels/stg_customers",
+          "name" : "stg_customers"
+        }, {
+          "label" : "stg_payments",
+          "value" : "stg_payments",
+          "id" : "43735/.prophecy/metadata/sqlmodels/stg_payments",
+          "name" : "stg_payments"
+        }, {
+          "label" : "customers",
+          "value" : "customers",
+          "id" : "43735/.prophecy/metadata/sqlmodels/customers",
+          "name" : "customers"
+        }, {
+          "label" : "orders",
+          "value" : "orders",
+          "id" : "43735/.prophecy/metadata/sqlmodels/orders",
+          "name" : "orders"
+        }, {
+          "label" : "stg_orders",
+          "value" : "stg_orders",
+          "id" : "43735/.prophecy/metadata/sqlmodels/stg_orders",
+          "name" : "stg_orders"
+        } ],
+        "profilesDir" : null,
+        "taskId" : null,
+        "logPath" : null,
+        "storeFailures" : null,
+        "entityKind" : null
+      },
+      "connections" : [ ],
+      "processes" : { }
+    }
+  },
+  "connections" : [ ]
+}
