@@ -29,7 +29,7 @@ def run_this_project():
           "select": "",
           "threads": "",
           "exclude": "",
-          "run_props": " --profile snowflake -t {{ var.value.DBT_TARGET }} --vars {\"DBT_TARGET\":\"{{ params.DBT_TARGET }}\"}",
+          "run_props": " --profile snowflake -t {{ params.DBT_TARGET }} --vars {\"DBT_TARGET\":\"{{ var.value.AIRFLOW_INSTANCE_ENV }}\"}",
           "envs": {"DBT_DATABRICKS_INVOCATION_ENV" : "prophecy", "DBT_PROFILES_DIR" : "/home/airflow/gcs/plugins"}
         },
     )
