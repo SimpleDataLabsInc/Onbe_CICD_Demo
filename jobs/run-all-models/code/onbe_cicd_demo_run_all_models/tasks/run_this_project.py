@@ -1,6 +1,6 @@
 from onbe_cicd_demo_run_all_models.utils import *
 
-def Model():
+def run_this_project():
     from airflow.operators.python import PythonOperator
     from datetime import timedelta
     import os
@@ -8,7 +8,7 @@ def Model():
     import tempfile
 
     return PythonOperator(
-        task_id = "Model",
+        task_id = "run_this_project",
         python_callable = invoke_dbt_runner,
         op_kwargs = {
           "is_adhoc_run_from_same_project": False,
@@ -29,7 +29,7 @@ def Model():
           "select": "",
           "threads": "",
           "exclude": "",
-          "run_props": " --profile snowflake",
+          "run_props": " --profile snowflake -t {{ var.value.DBT_TARGET }} --vars {\"DBT_TARGET\":\"{{ params.DBT_TARGET }}\"}",
           "envs": {"DBT_DATABRICKS_INVOCATION_ENV" : "prophecy", "DBT_PROFILES_DIR" : "/home/airflow/gcs/plugins"}
         },
     )

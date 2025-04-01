@@ -7,7 +7,7 @@ from airflow import DAG
 from airflow.models.param import Param
 from airflow.decorators import task
 sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
-from onbe_cicd_demo_run_all_models.tasks import Model
+from onbe_cicd_demo_run_all_models.tasks import run_this_project
 PROPHECY_RELEASE_TAG = "__PROJECT_ID_PLACEHOLDER__/__PROJECT_RELEASE_VERSION_PLACEHOLDER__"
 
 with DAG(
@@ -19,4 +19,4 @@ with DAG(
     catchup = False, 
     max_active_runs = 1
 ) as dag:
-    Model_op = Model()
+    run_this_project_op = run_this_project()

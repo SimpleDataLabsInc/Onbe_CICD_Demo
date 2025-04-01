@@ -58,8 +58,8 @@
       "id" : "PKD7lcltbefBDkjYFLXR4$$wGUR1qwe_o_hnJs7IEBx0",
       "component" : "Model",
       "metadata" : {
-        "label" : "Model",
-        "slug" : "Model",
+        "label" : "run_this_project",
+        "slug" : "run_this_project",
         "x" : -1520,
         "y" : -600
       },
@@ -93,7 +93,7 @@
         "gitSshUrl" : null,
         "indirectSelection" : null,
         "partialParse" : null,
-        "vars" : null,
+        "vars" : "{\"DBT_TARGET\":\"{{ params.DBT_TARGET }}\"}",
         "isAdhocRunFromSameProject" : null,
         "noPrint" : null,
         "quiet" : null,
@@ -124,7 +124,7 @@
         "runModelWithChildren" : false,
         "dbtProfileSecret" : null,
         "gitEntityValueCommit" : null,
-        "target" : null,
+        "target" : "{{ var.value.DBT_TARGET }}",
         "exclude" : null,
         "runDeps" : null,
         "loadingSnapshots" : false,
