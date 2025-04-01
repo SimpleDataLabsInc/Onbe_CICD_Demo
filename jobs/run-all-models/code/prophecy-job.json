@@ -1,8 +1,8 @@
 {
   "metainfo" : {
-    "type" : "Prophecy",
-    "fabricId" : "23284",
-    "jobId" : "jobs/run-all-dev",
+    "type" : "Composer",
+    "fabricId" : "23283",
+    "jobId" : "jobs/run-all-models",
     "name" : "run-all-models",
     "dagName" : "Onbe_CICD_Demo_run_all_models",
     "schedule" : "0/1 * * * *",
@@ -25,13 +25,13 @@
     "dagParams" : {
       "instances" : {
         "default" : {
-          "DBT_TARGET" : "PROD"
-        },
-        "dev" : {
           "DBT_TARGET" : "DEV"
         },
         "prod" : {
           "DBT_TARGET" : "PROD"
+        },
+        "dev" : {
+          "DBT_TARGET" : ""
         }
       },
       "params" : {
@@ -39,7 +39,7 @@
           "type" : "StringParam",
           "properties" : {
             "title" : "DBT_TARGET",
-            "value" : "PROD",
+            "value" : "DEV",
             "canBeNull" : false
           }
         }
@@ -55,22 +55,22 @@
     }
   },
   "processes" : {
-    "hRqUliz94CZBzrpcpr_-a$$_VroIQIAFaAc-w_IF1f4X" : {
-      "id" : "hRqUliz94CZBzrpcpr_-a$$_VroIQIAFaAc-w_IF1f4X",
+    "PKD7lcltbefBDkjYFLXR4$$wGUR1qwe_o_hnJs7IEBx0" : {
+      "id" : "PKD7lcltbefBDkjYFLXR4$$wGUR1qwe_o_hnJs7IEBx0",
       "component" : "Model",
       "metadata" : {
-        "label" : "Run_All_Models",
-        "slug" : "Run_All_Models",
-        "x" : -7660,
-        "y" : -3680
+        "label" : "run_this_project",
+        "slug" : "run_this_project",
+        "x" : -1520,
+        "y" : -600
       },
       "ports" : {
         "inputs" : [ {
-          "id" : "Cbe35yjU0rOUK2AyHdD2c$$tPoSbbBNoiCxPNR6ZjZ16",
+          "id" : "X2ZTpZqfEHNL18_QtZslx$$8prwdjve_b7-rAc9cKZi2",
           "slug" : ""
         } ],
         "outputs" : [ {
-          "id" : "ewuCNqJoXYZLPqvGD4HY_$$F1KMt6EeDBZrYFcdEKnFX",
+          "id" : "rvzgmT_ZjX7ptgsWIhkkP$$xRUM-dwNzL94Yvd89xz3C",
           "slug" : ""
         } ]
       },
@@ -96,7 +96,6 @@
         "partialParse" : null,
         "vars" : "{\"DBT_TARGET\":\"{{ var.value.AIRFLOW_INSTANCE_ENV }}\"}",
         "isAdhocRunFromSameProject" : null,
-        "customVersion" : false,
         "noPrint" : null,
         "quiet" : null,
         "projectId" : "43735",
@@ -120,8 +119,8 @@
         "noVersionCheck" : null,
         "noWriteJson" : null,
         "printerWidth" : null,
-        "sqlFabricId" : "23673",
-        "gitEntityValue" : "composer-dev",
+        "sqlFabricId" : "22696",
+        "gitEntityValue" : null,
         "logFormat" : null,
         "runModelWithChildren" : false,
         "dbtProfileSecret" : null,
@@ -130,7 +129,7 @@
         "exclude" : null,
         "runDeps" : null,
         "loadingSnapshots" : false,
-        "gitEntityValueBranch" : "composer-dev",
+        "gitEntityValueBranch" : null,
         "noAnonymousUsageStats" : null,
         "selector" : null,
         "targetPath" : null,

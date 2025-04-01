@@ -9,13 +9,12 @@ pipelines: {}
 datasets: {}
 templates: {}
 jobs:
-  jobs/run-all-dev:
+  jobs/run-all-models:
     name: run-all-models
-    description: Runs all Models in the designated Project.  See dynamic parameters
-      in Job config and Gem properties.
-    fabricUID: 23284
+    description: ''
+    fabricUID: 23283
     scheduler:
-      Prophecy: {}
+      Composer: {}
     cloudProvider: null
     jobSize: null
     scheduleCron: 0/1 * * * *
@@ -31,7 +30,7 @@ jobs:
         Multi: {}
       clusterId: null
     enabled: true
-    createdAt: '2025-03-13 21:26:32'
+    createdAt: '2025-04-01 15:41:34'
     author: best.neil@prophecy.io
     models: []
     sqlProjects:
